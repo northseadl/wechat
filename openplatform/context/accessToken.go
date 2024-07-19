@@ -1,4 +1,4 @@
-// Package context 开放平台相关context
+// Package context 开放平台相关 context
 package context
 
 import (
@@ -48,7 +48,7 @@ func (ctx *Context) GetComponentAccessToken() (string, error) {
 	return ctx.GetComponentAccessTokenContext(context.Background())
 }
 
-// SetComponentAccessTokenContext 通过component_verify_ticket 获取 ComponentAccessToken
+// SetComponentAccessTokenContext 通过 component_verify_ticket 获取 ComponentAccessToken
 func (ctx *Context) SetComponentAccessTokenContext(stdCtx context.Context, verifyTicket string) (*ComponentAccessToken, error) {
 	body := map[string]string{
 		"component_appid":         ctx.AppID,
@@ -77,7 +77,7 @@ func (ctx *Context) SetComponentAccessTokenContext(stdCtx context.Context, verif
 	return at, nil
 }
 
-// SetComponentAccessToken 通过component_verify_ticket 获取 ComponentAccessToken
+// SetComponentAccessToken 通过 component_verify_ticket 获取 ComponentAccessToken
 func (ctx *Context) SetComponentAccessToken(stdCtx context.Context, verifyTicket string) (*ComponentAccessToken, error) {
 	return ctx.SetComponentAccessTokenContext(stdCtx, verifyTicket)
 }
@@ -109,7 +109,7 @@ func (ctx *Context) GetPreCode() (string, error) {
 	return ctx.GetPreCodeContext(context.Background())
 }
 
-// GetComponentLoginPageContext 获取第三方公众号授权链接(扫码授权)
+// GetComponentLoginPageContext 获取第三方公众号授权链接 (扫码授权)
 func (ctx *Context) GetComponentLoginPageContext(stdCtx context.Context, redirectURI string, authType int, bizAppID string) (string, error) {
 	code, err := ctx.GetPreCodeContext(stdCtx)
 	if err != nil {
@@ -118,12 +118,12 @@ func (ctx *Context) GetComponentLoginPageContext(stdCtx context.Context, redirec
 	return fmt.Sprintf(componentLoginURL, ctx.AppID, code, url.QueryEscape(redirectURI), authType, bizAppID), nil
 }
 
-// GetComponentLoginPage 获取第三方公众号授权链接(扫码授权)
+// GetComponentLoginPage 获取第三方公众号授权链接 (扫码授权)
 func (ctx *Context) GetComponentLoginPage(redirectURI string, authType int, bizAppID string) (string, error) {
 	return ctx.GetComponentLoginPageContext(context.Background(), redirectURI, authType, bizAppID)
 }
 
-// GetBindComponentURLContext 获取第三方公众号授权链接(链接跳转，适用移动端)
+// GetBindComponentURLContext 获取第三方公众号授权链接 (链接跳转，适用移动端)
 func (ctx *Context) GetBindComponentURLContext(stdCtx context.Context, redirectURI string, authType int, bizAppID string) (string, error) {
 	code, err := ctx.GetPreCodeContext(stdCtx)
 	if err != nil {
@@ -132,7 +132,7 @@ func (ctx *Context) GetBindComponentURLContext(stdCtx context.Context, redirectU
 	return fmt.Sprintf(bindComponentURL, authType, ctx.AppID, code, url.QueryEscape(redirectURI), bizAppID), nil
 }
 
-// GetBindComponentURL 获取第三方公众号授权链接(链接跳转，适用移动端)
+// GetBindComponentURL 获取第三方公众号授权链接 (链接跳转，适用移动端)
 func (ctx *Context) GetBindComponentURL(redirectURI string, authType int, bizAppID string) (string, error) {
 	return ctx.GetBindComponentURLContext(context.Background(), redirectURI, authType, bizAppID)
 }
@@ -153,7 +153,7 @@ type AuthFuncInfo struct {
 	FuncscopeCategory ID `json:"funcscope_category"`
 }
 
-// AuthrAccessToken 授权方AccessToken
+// AuthrAccessToken 授权方 AccessToken
 type AuthrAccessToken struct {
 	Appid        string `json:"authorizer_appid"`
 	AccessToken  string `json:"authorizer_access_token"`
@@ -233,7 +233,7 @@ func (ctx *Context) RefreshAuthrToken(appid, refreshToken string) (*AuthrAccessT
 	return ctx.RefreshAuthrTokenContext(context.Background(), appid, refreshToken)
 }
 
-// GetAuthrAccessTokenContext 获取授权方AccessToken
+// GetAuthrAccessTokenContext 获取授权方 AccessToken
 func (ctx *Context) GetAuthrAccessTokenContext(stdCtx context.Context, appid string) (string, error) {
 	authrTokenKey := "authorizer_access_token_" + appid
 	val := cache.GetContext(stdCtx, ctx.Cache, authrTokenKey)
@@ -243,7 +243,7 @@ func (ctx *Context) GetAuthrAccessTokenContext(stdCtx context.Context, appid str
 	return val.(string), nil
 }
 
-// GetAuthrAccessToken 获取授权方AccessToken
+// GetAuthrAccessToken 获取授权方 AccessToken
 func (ctx *Context) GetAuthrAccessToken(appid string) (string, error) {
 	return ctx.GetAuthrAccessTokenContext(context.Background(), appid)
 }
