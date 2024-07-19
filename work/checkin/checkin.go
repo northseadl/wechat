@@ -217,7 +217,7 @@ type OptionGroupSpeOffDays struct {
 	EndTime   int64  `json:"endtime"`
 }
 
-// OptionGroupWifiMacInfos WIFI信息
+// OptionGroupWifiMacInfos WIFI 信息
 type OptionGroupWifiMacInfos struct {
 	WifiName string `json:"wifiname"`
 	WifiMac  string `json:"wifimac"`

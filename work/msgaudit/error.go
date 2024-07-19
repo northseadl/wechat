@@ -10,11 +10,11 @@ import (
 // 10002	数据解析失败
 // 10003	系统失败
 // 10004	密钥错误导致加密失败
-// 10005	fileid错误
+// 10005	fileid 错误
 // 10006	解密失败
 // 10007 找不到消息加密版本的私钥，需要重新传入私钥对
-// 10008 解析encrypt_key出错
-// 10009 ip非法
+// 10008 解析 encrypt_key 出错
+// 10009 ip 非法
 // 10010 数据过期
 // 10011	证书错误
 const (
@@ -24,11 +24,11 @@ const (
 	SDKParseErrMsg          = "数据解析失败"
 	SDKSystemErrMsg         = "系统失败"
 	SDKSecretErrMsg         = "密钥错误导致加密失败"
-	SDKFileIDErrMsg         = "fileid错误"
+	SDKFileIDErrMsg         = "fileid 错误"
 	SDKDecryptErrMsg        = "解密失败"
 	SDKSecretMissErrMsg     = "找不到消息加密版本的私钥，需要重新传入私钥对"
-	SDKEncryptKeyErrMsg     = "解析encrypt_key出错"
-	SDKIPNotWhiteListErrMsg = "ip非法"
+	SDKEncryptKeyErrMsg     = "解析 encrypt_key 出错"
+	SDKIPNotWhiteListErrMsg = "ip 非法"
 	SDKDataExpiredErrMsg    = "数据过期"
 	SDKTokenExpiredErrMsg   = "证书过期"
 )
@@ -43,7 +43,7 @@ func (e Error) Error() string {
 	return fmt.Sprintf("%d:%s", e.ErrCode, e.ErrMsg)
 }
 
-// NewSDKErr 初始化新的SDK错误
+// NewSDKErr 初始化新的 SDK 错误
 func NewSDKErr(code int) Error {
 	msg := ""
 	switch code {

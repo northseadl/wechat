@@ -12,13 +12,13 @@ const groupChatURL = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupc
 type (
 	// AddJoinWayRequest 添加群配置请求参数
 	AddJoinWayRequest struct {
-		Scene          int      `json:"scene"`            // 必填 1 - 群的小程序插件,2 - 群的二维码插件
-		Remark         string   `json:"remark"`           //非必填	联系方式的备注信息，用于助记，超过30个字符将被截断
-		AutoCreateRoom int      `json:"auto_create_room"` //非必填	当群满了后，是否自动新建群。0-否；1-是。 默认为1
-		RoomBaseName   string   `json:"room_base_name"`   //非必填	自动建群的群名前缀，当auto_create_room为1时有效。最长40个utf8字符
-		RoomBaseID     int      `json:"room_base_id"`     //非必填	自动建群的群起始序号，当auto_create_room为1时有效
-		ChatIDList     []string `json:"chat_id_list"`     //必填	使用该配置的客户群ID列表，支持5个。见客户群ID获取方法
-		State          string   `json:"state"`            //非必填	企业自定义的state参数，用于区分不同的入群渠道。不超过30个UTF-8字符
+		Scene          int      `json:"scene"`            // 必填 1 - 群的小程序插件，2 - 群的二维码插件
+		Remark         string   `json:"remark"`           //非必填	联系方式的备注信息，用于助记，超过 30 个字符将被截断
+		AutoCreateRoom int      `json:"auto_create_room"` //非必填	当群满了后，是否自动新建群。0-否；1-是。默认为 1
+		RoomBaseName   string   `json:"room_base_name"`   //非必填	自动建群的群名前缀，当 auto_create_room 为 1 时有效。最长 40 个 utf8 字符
+		RoomBaseID     int      `json:"room_base_id"`     //非必填	自动建群的群起始序号，当 auto_create_room 为 1 时有效
+		ChatIDList     []string `json:"chat_id_list"`     //必填	使用该配置的客户群 ID 列表，支持 5 个。见客户群 ID 获取方法
+		State          string   `json:"state"`            //非必填	企业自定义的 state 参数，用于区分不同的入群渠道。不超过 30 个 UTF-8 字符
 	}
 
 	// AddJoinWayResponse 添加群配置返回值
@@ -96,13 +96,13 @@ func (r *Client) GetJoinWay(req *JoinWayConfigRequest) (*GetJoinWayResponse, err
 // UpdateJoinWayRequest 更新群配置的请求参数
 type UpdateJoinWayRequest struct {
 	ConfigID       string   `json:"config_id"`
-	Scene          int      `json:"scene"`            // 必填 1 - 群的小程序插件,2 - 群的二维码插件
-	Remark         string   `json:"remark"`           //非必填	联系方式的备注信息，用于助记，超过30个字符将被截断
-	AutoCreateRoom int      `json:"auto_create_room"` //非必填	当群满了后，是否自动新建群。0-否；1-是。 默认为1
-	RoomBaseName   string   `json:"room_base_name"`   //非必填	自动建群的群名前缀，当auto_create_room为1时有效。最长40个utf8字符
-	RoomBaseID     int      `json:"room_base_id"`     //非必填	自动建群的群起始序号，当auto_create_room为1时有效
-	ChatIDList     []string `json:"chat_id_list"`     //必填	使用该配置的客户群ID列表，支持5个。见客户群ID获取方法
-	State          string   `json:"state"`            //非必填	企业自定义的state参数，用于区分不同的入群渠道。不超过30个UTF-8字符
+	Scene          int      `json:"scene"`            // 必填 1 - 群的小程序插件，2 - 群的二维码插件
+	Remark         string   `json:"remark"`           //非必填	联系方式的备注信息，用于助记，超过 30 个字符将被截断
+	AutoCreateRoom int      `json:"auto_create_room"` //非必填	当群满了后，是否自动新建群。0-否；1-是。默认为 1
+	RoomBaseName   string   `json:"room_base_name"`   //非必填	自动建群的群名前缀，当 auto_create_room 为 1 时有效。最长 40 个 utf8 字符
+	RoomBaseID     int      `json:"room_base_id"`     //非必填	自动建群的群起始序号，当 auto_create_room 为 1 时有效
+	ChatIDList     []string `json:"chat_id_list"`     //必填	使用该配置的客户群 ID 列表，支持 5 个。见客户群 ID 获取方法
+	State          string   `json:"state"`            //非必填	企业自定义的 state 参数，用于区分不同的入群渠道。不超过 30 个 UTF-8 字符
 }
 
 // UpdateJoinWay 更新客户群进群方式配置

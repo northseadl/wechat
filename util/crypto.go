@@ -44,7 +44,7 @@ func EncryptMsg(random, rawXMLMsg []byte, appID, aesKey string) (encrtptMsg []by
 func AESEncryptMsg(random, rawXMLMsg []byte, appID string, aesKey []byte) (ciphertext []byte) {
 	const (
 		BlockSize = 32            // PKCS#7
-		BlockMask = BlockSize - 1 // BLOCK_SIZE 为 2^n 时, 可以用 mask 获取针对 BLOCK_SIZE 的余数
+		BlockMask = BlockSize - 1 // BLOCK_SIZE 为 2^n 时，可以用 mask 获取针对 BLOCK_SIZE 的余数
 	)
 
 	appIDOffset := 20 + len(rawXMLMsg)
@@ -100,7 +100,7 @@ func DecryptMsg(appID, encryptedMsg, aesKey string) (random, rawMsgXMLBytes []by
 		return
 	}
 	if appID != string(getAppIDBytes) {
-		err = fmt.Errorf("消息解密校验APPID失败")
+		err = fmt.Errorf("消息解密校验 APPID 失败")
 		return
 	}
 	return
@@ -127,7 +127,7 @@ func aesKeyDecode(encodedAESKey string) (key []byte, err error) {
 func AESDecryptMsg(ciphertext []byte, aesKey []byte) (random, rawXMLMsg, appID []byte, err error) {
 	const (
 		BlockSize = 32            // PKCS#7
-		BlockMask = BlockSize - 1 // BLOCK_SIZE 为 2^n 时, 可以用 mask 获取针对 BLOCK_SIZE 的余数
+		BlockMask = BlockSize - 1 // BLOCK_SIZE 为 2^n 时，可以用 mask 获取针对 BLOCK_SIZE 的余数
 	)
 
 	if len(ciphertext) < BlockSize {

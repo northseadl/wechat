@@ -9,7 +9,7 @@ import (
 const (
 	// departmentCreateURL 创建部门
 	departmentCreateURL = "https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=%s"
-	// departmentSimpleListURL 获取子部门ID列表
+	// departmentSimpleListURL 获取子部门 ID 列表
 	departmentSimpleListURL = "https://qyapi.weixin.qq.com/cgi-bin/department/simplelist?access_token=%s&id=%d"
 	// departmentListURL 获取部门列表
 	departmentListURL     = "https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token=%s"
@@ -33,12 +33,12 @@ type (
 		ID int `json:"id"`
 	}
 
-	// DepartmentSimpleListResponse 获取子部门ID列表响应
+	// DepartmentSimpleListResponse 获取子部门 ID 列表响应
 	DepartmentSimpleListResponse struct {
 		util.CommonError
 		DepartmentID []*DepartmentID `json:"department_id"`
 	}
-	// DepartmentID 子部门ID
+	// DepartmentID 子部门 ID
 	DepartmentID struct {
 		ID       int `json:"id"`
 		ParentID int `json:"parentid"`
@@ -52,12 +52,12 @@ type (
 	}
 	// Department 部门列表数据
 	Department struct {
-		ID               int      `json:"id"`                // 创建的部门id
+		ID               int      `json:"id"`                // 创建的部门 id
 		Name             string   `json:"name"`              // 部门名称
 		NameEn           string   `json:"name_en"`           // 英文名称
-		DepartmentLeader []string `json:"department_leader"` // 部门负责人的UserID
-		ParentID         int      `json:"parentid"`          // 父部门id。根部门为1
-		Order            int      `json:"order"`             // 在父部门中的次序值。order值大的排序靠前
+		DepartmentLeader []string `json:"department_leader"` // 部门负责人的 UserID
+		ParentID         int      `json:"parentid"`          // 父部门 id。根部门为 1
+		Order            int      `json:"order"`             // 在父部门中的次序值。order 值大的排序靠前
 	}
 	// DepartmentGetResponse 获取单个部门详情
 	DepartmentGetResponse struct {
@@ -85,7 +85,7 @@ func (r *Client) DepartmentCreate(req *DepartmentCreateRequest) (*DepartmentCrea
 	return result, err
 }
 
-// DepartmentSimpleList 获取子部门ID列表
+// DepartmentSimpleList 获取子部门 ID 列表
 // see https://developer.work.weixin.qq.com/document/path/95350
 func (r *Client) DepartmentSimpleList(departmentID int) ([]*DepartmentID, error) {
 	var (
@@ -112,13 +112,13 @@ func (r *Client) DepartmentList() ([]*Department, error) {
 
 // DepartmentListByID 获取部门列表
 //
-// departmentID 部门id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）
+// departmentID 部门 id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）
 //
 // @desc https://developer.work.weixin.qq.com/document/path/90208
 func (r *Client) DepartmentListByID(departmentID int) ([]*Department, error) {
 	var formatURL string
 
-	// 获取accessToken
+	// 获取 accessToken
 	accessToken, err := r.GetAccessToken()
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (r *Client) DepartmentListByID(departmentID int) ([]*Department, error) {
 		formatURL = fmt.Sprintf(departmentListURL, accessToken)
 	}
 
-	// 发起http请求
+	// 发起 http 请求
 	response, err := util.HTTPGet(formatURL)
 	if err != nil {
 		return nil, err

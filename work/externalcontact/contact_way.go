@@ -116,7 +116,7 @@ type (
 		util.CommonError
 		ContactWay ContactWay `json:"contact_way"`
 	}
-	// ContactWay 「联系我」配置
+	// ContactWay「联系我」配置
 	ContactWay struct {
 		ConfigID      string              `json:"config_id"`
 		Type          int                 `json:"type"`
@@ -209,7 +209,7 @@ type (
 		ContactWay []*ContactWayForList `json:"contact_way"`
 		NextCursor string               `json:"next_cursor"`
 	}
-	// ContactWayForList 「联系我」配置
+	// ContactWayForList「联系我」配置
 	ContactWayForList struct {
 		ConfigID string `json:"config_id"`
 	}

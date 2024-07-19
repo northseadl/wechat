@@ -21,7 +21,7 @@ type MiniProgram struct {
 	authorizerRefreshToken string
 }
 
-// GetAccessToken 获取ak
+// GetAccessToken 获取 ak
 func (miniProgram *MiniProgram) GetAccessToken() (string, error) {
 	ak, akErr := miniProgram.openContext.GetAuthrAccessToken(miniProgram.AppID)
 	if akErr == nil {
@@ -37,7 +37,7 @@ func (miniProgram *MiniProgram) GetAccessToken() (string, error) {
 	return akRes.AccessToken, nil
 }
 
-// SetAuthorizerRefreshToken 设置代执操作业务授权账号authorizer_refresh_token
+// SetAuthorizerRefreshToken 设置代执操作业务授权账号 authorizer_refresh_token
 func (miniProgram *MiniProgram) SetAuthorizerRefreshToken(authorizerRefreshToken string) *MiniProgram {
 	miniProgram.authorizerRefreshToken = authorizerRefreshToken
 	return miniProgram
@@ -49,7 +49,7 @@ func NewMiniProgram(opCtx *openContext.Context, appID string) *MiniProgram {
 		AppID: opCtx.AppID,
 		Cache: opCtx.Cache,
 	})
-	// 设置获取access_token的函数
+	// 设置获取 access_token 的函数
 	miniProgram.SetAccessTokenHandle(NewDefaultAuthrAccessToken(opCtx, appID))
 	return &MiniProgram{AppID: appID, MiniProgram: miniProgram, openContext: opCtx}
 }
@@ -65,20 +65,20 @@ func (miniProgram *MiniProgram) GetBasic() *basic.Basic {
 	return basic.NewBasic(miniProgram.openContext, miniProgram.AppID)
 }
 
-// GetURLLink 小程序URL Link接口 调用前需确认已调用 SetAuthorizerRefreshToken 避免由于缓存中 authorizer_access_token 过期执行中断
+// GetURLLink 小程序 URL Link 接口 调用前需确认已调用 SetAuthorizerRefreshToken 避免由于缓存中 authorizer_access_token 过期执行中断
 func (miniProgram *MiniProgram) GetURLLink() *urllink.URLLink {
 	return urllink.NewURLLink(&miniContext.Context{
 		AccessTokenHandle: miniProgram,
 	})
 }
 
-// DefaultAuthrAccessToken 默认获取授权ak的方法
+// DefaultAuthrAccessToken 默认获取授权 ak 的方法
 type DefaultAuthrAccessToken struct {
 	opCtx *openContext.Context
 	appID string
 }
 
-// NewDefaultAuthrAccessToken 设置access_token
+// NewDefaultAuthrAccessToken 设置 access_token
 func NewDefaultAuthrAccessToken(opCtx *openContext.Context, appID string) credential.AccessTokenHandle {
 	return &DefaultAuthrAccessToken{
 		opCtx: opCtx,
@@ -86,7 +86,7 @@ func NewDefaultAuthrAccessToken(opCtx *openContext.Context, appID string) creden
 	}
 }
 
-// GetAccessToken 获取ak
+// GetAccessToken 获取 ak
 func (ak *DefaultAuthrAccessToken) GetAccessToken() (string, error) {
 	return ak.opCtx.GetAuthrAccessToken(ak.appID)
 }

@@ -75,7 +75,7 @@ func (notify *Notify) PaidVerifySign(notifyRes PaidResult) bool {
 	}
 	sort.Strings(sortedKeys)
 
-	// STEP2, 对key=value的键值对用&连接起来，略过空值 & sign
+	// STEP2, 对 key=value 的键值对用&连接起来，略过空值 & sign
 	var signStrings string
 	for _, k := range sortedKeys {
 		value := fmt.Sprintf("%v", cast.ToString(resMap[k]))
@@ -84,10 +84,10 @@ func (notify *Notify) PaidVerifySign(notifyRes PaidResult) bool {
 		}
 	}
 
-	// STEP3, 在键值对的最后加上key=API_KEY
+	// STEP3, 在键值对的最后加上 key=API_KEY
 	signStrings = signStrings + "key=" + notify.Key
 
-	// STEP4, 根据SignType计算出签名
+	// STEP4, 根据 SignType 计算出签名
 	var signType string
 	if notifyRes.SignType != nil {
 		signType = *notifyRes.SignType

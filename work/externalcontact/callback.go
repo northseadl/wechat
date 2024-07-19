@@ -8,8 +8,8 @@ import (
 
 // 原始回调消息内容
 type callbackOriginMessage struct {
-	ToUserName string // 企业微信的CorpID，当为第三方套件回调事件时，CorpID的内容为suiteid
-	AgentID    string // 接收的应用id，可在应用的设置页面获取
+	ToUserName string // 企业微信的 CorpID，当为第三方套件回调事件时，CorpID 的内容为 suiteid
+	AgentID    string // 接收的应用 id，可在应用的设置页面获取
 	Encrypt    string // 消息结构体加密后的字符串
 }
 

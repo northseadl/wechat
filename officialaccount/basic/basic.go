@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	// 获取微信服务器IP地址
+	// 获取微信服务器 IP 地址
 	// 文档：https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_the_WeChat_server_IP_address.html
 	getCallbackIPURL  = "https://api.weixin.qq.com/cgi-bin/getcallbackip"
 	getAPIDomainIPURL = "https://api.weixin.qq.com/cgi-bin/get_api_domain_ip"
@@ -29,13 +29,13 @@ func NewBasic(context *context.Context) *Basic {
 	return basic
 }
 
-// IPListRes 获取微信服务器IP地址 返回结果
+// IPListRes 获取微信服务器 IP 地址 返回结果
 type IPListRes struct {
 	util.CommonError
 	IPList []string `json:"ip_list"`
 }
 
-// GetCallbackIP 获取微信callback IP地址
+// GetCallbackIP 获取微信 callback IP 地址
 func (basic *Basic) GetCallbackIP() ([]string, error) {
 	ak, err := basic.GetAccessToken()
 	if err != nil {
@@ -51,7 +51,7 @@ func (basic *Basic) GetCallbackIP() ([]string, error) {
 	return ipListRes.IPList, err
 }
 
-// GetAPIDomainIP 获取微信API接口 IP地址
+// GetAPIDomainIP 获取微信 API 接口 IP 地址
 func (basic *Basic) GetAPIDomainIP() ([]string, error) {
 	ak, err := basic.GetAccessToken()
 	if err != nil {

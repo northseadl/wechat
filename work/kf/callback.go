@@ -16,14 +16,14 @@ type SignatureOptions struct {
 
 // VerifyURL 验证请求参数是否合法并返回解密后的消息内容
 //
-//	 //Gin框架的使用示例
+//	 //Gin 框架的使用示例
 //		r.GET("/v1/event/callback", func(c *gin.Context) {
 //			options := kf.SignatureOptions{}
 //			//获取回调的的校验参数
 //			if = c.ShouldBindQuery(&options); err != nil {
 //				c.String(http.StatusUnauthorized, "参数解析失败")
 //			}
-//			// 调用VerifyURL方法校验当前请求，如果合法则把解密后的内容作为响应返回给微信服务器
+//			// 调用 VerifyURL 方法校验当前请求，如果合法则把解密后的内容作为响应返回给微信服务器
 //			echo, err := kfClient.VerifyURL(options)
 //			if err == nil {
 //				c.String(http.StatusOK, echo)
@@ -45,24 +45,24 @@ func (r *Client) VerifyURL(options SignatureOptions) (string, error) {
 
 // 原始回调消息内容
 type callbackOriginMessage struct {
-	ToUserName string // 企业微信的CorpID，当为第三方套件回调事件时，CorpID的内容为suiteid
-	AgentID    string // 接收的应用id，可在应用的设置页面获取
+	ToUserName string // 企业微信的 CorpID，当为第三方套件回调事件时，CorpID 的内容为 suiteid
+	AgentID    string // 接收的应用 id，可在应用的设置页面获取
 	Encrypt    string // 消息结构体加密后的字符串
 }
 
 // CallbackMessage 微信客服回调消息
 type CallbackMessage struct {
-	ToUserName string `json:"to_user_name" xml:"ToUserName"` // 微信客服组件ID
-	CreateTime int64  `json:"create_time" xml:"CreateTime"`  // 消息创建时间，unix时间戳
+	ToUserName string `json:"to_user_name" xml:"ToUserName"` // 微信客服组件 ID
+	CreateTime int64  `json:"create_time" xml:"CreateTime"`  // 消息创建时间，unix 时间戳
 	MsgType    string `json:"msgtype" xml:"MsgType"`         // 消息的类型，此时固定为 event
 	Event      string `json:"event" xml:"Event"`             // 事件的类型，此时固定为 kf_msg_or_event
-	Token      string `json:"token" xml:"Token"`             // 调用拉取消息接口时，需要传此token，用于校验请求的合法性
-	OpenKfID   string `json:"open_kfid" xml:"OpenKfId"`      // 有新消息的客服帐号。可通过sync_msg接口指定open_kfid获取此客服帐号的消息
+	Token      string `json:"token" xml:"Token"`             // 调用拉取消息接口时，需要传此 token，用于校验请求的合法性
+	OpenKfID   string `json:"open_kfid" xml:"OpenKfId"`      // 有新消息的客服帐号。可通过 sync_msg 接口指定 open_kfid 获取此客服帐号的消息
 }
 
 // GetCallbackMessage 获取回调事件中的消息内容
 //
-//	 //Gin框架的使用示例
+//	 //Gin 框架的使用示例
 //		r.POST("/v1/event/callback", func(c *gin.Context) {
 //			var (
 //				message kf.CallbackMessage

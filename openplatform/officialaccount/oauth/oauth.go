@@ -16,19 +16,19 @@ const (
 	platformAccessTokenURL   = "https://api.weixin.qq.com/sns/oauth2/component/access_token?appid=%s&code=%s&grant_type=authorization_code&component_appid=%s&component_access_token=%s"
 )
 
-// Oauth 平台代发起oauth2网页授权
+// Oauth 平台代发起 oauth2 网页授权
 type Oauth struct {
 	*context.Context
 }
 
-// NewOauth 实例化平台代发起oauth2网页授权
+// NewOauth 实例化平台代发起 oauth2 网页授权
 func NewOauth(context *context.Context) *Oauth {
 	auth := new(Oauth)
 	auth.Context = context
 	return auth
 }
 
-// GetRedirectURL 第三方平台 - 获取跳转的url地址
+// GetRedirectURL 第三方平台 - 获取跳转的 url 地址
 func (oauth *Oauth) GetRedirectURL(redirectURI, scope, state, appID string) (string, error) {
 	// url encode
 	urlStr := url.QueryEscape(redirectURI)
@@ -45,7 +45,7 @@ func (oauth *Oauth) Redirect(writer http.ResponseWriter, req *http.Request, redi
 	return nil
 }
 
-// GetUserAccessToken 第三方平台 - 通过网页授权的code 换取access_token(区别于context中的access_token)
+// GetUserAccessToken 第三方平台 - 通过网页授权的 code 换取 access_token(区别于 context 中的 access_token)
 func (oauth *Oauth) GetUserAccessToken(code, appID, componentAccessToken string) (result officialOauth.ResAccessToken, err error) {
 	urlStr := fmt.Sprintf(platformAccessTokenURL, appID, code, oauth.AppID, componentAccessToken)
 	var response []byte

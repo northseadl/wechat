@@ -31,14 +31,14 @@ func NewSubscribe(context *context.Context) *Subscribe {
 
 // SubscribeMessage 发送的订阅消息内容
 type SubscribeMessage struct {
-	ToUser      string                        `json:"touser"`         // 必须, 接受者OpenID
-	TemplateID  string                        `json:"template_id"`    // 必须, 模版ID
-	Page        string                        `json:"page,omitempty"` // 可选, 跳转网页时填写
-	Data        map[string]*SubscribeDataItem `json:"data"`           // 必须, 模板数据
+	ToUser      string                        `json:"touser"`         // 必须，接受者 OpenID
+	TemplateID  string                        `json:"template_id"`    // 必须，模版 ID
+	Page        string                        `json:"page,omitempty"` // 可选，跳转网页时填写
+	Data        map[string]*SubscribeDataItem `json:"data"`           // 必须，模板数据
 	MiniProgram struct {
-		AppID    string `json:"appid"`    // 所需跳转到的小程序appid（该小程序appid必须与发模板消息的公众号是绑定关联关系）
-		PagePath string `json:"pagepath"` // 所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar）
-	} `json:"miniprogram"` // 可选,跳转至小程序地址
+		AppID    string `json:"appid"`    // 所需跳转到的小程序 appid（该小程序 appid 必须与发模板消息的公众号是绑定关联关系）
+		PagePath string `json:"pagepath"` // 所需跳转到小程序的具体页面路径，支持带参数，（示例 index?foo=bar）
+	} `json:"miniprogram"` // 可选，跳转至小程序地址
 }
 
 // SubscribeDataItem 模版内某个 .DATA 的值
@@ -143,7 +143,7 @@ func (tpl *Subscribe) Delete(templateID string) (err error) {
 
 // PublicTemplateCategory 公众号类目
 type PublicTemplateCategory struct {
-	ID   int    `json:"id"`   // 类目ID
+	ID   int    `json:"id"`   // 类目 ID
 	Name string `json:"name"` // 类目的中文名
 }
 

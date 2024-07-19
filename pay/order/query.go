@@ -19,7 +19,7 @@ type QueryParams struct {
 
 // queryRequest 接口请求参数
 type queryRequest struct {
-	AppID         string `xml:"appid"`               // 公众账号ID
+	AppID         string `xml:"appid"`               // 公众账号 ID
 	MchID         string `xml:"mch_id"`              // 商户号
 	NonceStr      string `xml:"nonce_str"`           // 随机字符串
 	Sign          string `xml:"sign"`                // 签名

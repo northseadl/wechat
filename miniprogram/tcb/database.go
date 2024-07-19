@@ -49,13 +49,13 @@ type ConflictMode int
 // FileType 文件上传和导出的允许文件类型
 type FileType int
 
-// ValidDirections 合法的direction值
+// ValidDirections 合法的 direction 值
 var ValidDirections = []string{"1", "-1", "2dsphere"}
 
 // DatabaseMigrateExportReq 数据库出 请求参数
 type DatabaseMigrateExportReq struct {
-	Env      string   `json:"env,omitempty"`       // 云环境ID
-	FilePath string   `json:"file_path,omitempty"` // 导出文件路径(导入文件需先上传到同环境的存储中，可使用开发者工具或 HTTP API的上传文件 API上传）
+	Env      string   `json:"env,omitempty"`       // 云环境 ID
+	FilePath string   `json:"file_path,omitempty"` // 导出文件路径 (导入文件需先上传到同环境的存储中，可使用开发者工具或 HTTP API 的上传文件 API 上传）
 	FileType FileType `json:"file_type,omitempty"` // 导出文件类型，文件格式参考数据库导入指引中的文件格式部分  1:json 2:csv
 	Query    string   `json:"query,omitempty"`     // 导出条件
 }
@@ -63,12 +63,12 @@ type DatabaseMigrateExportReq struct {
 // DatabaseMigrateExportRes 数据库导出 返回结果
 type DatabaseMigrateExportRes struct {
 	util.CommonError
-	JobID int64 `json:"job_id"` // 导出任务ID，可使用数据库迁移进度查询 API 查询导入进度及结果
+	JobID int64 `json:"job_id"` // 导出任务 ID，可使用数据库迁移进度查询 API 查询导入进度及结果
 }
 
 // DatabaseMigrateImportReq 数据库导入 请求参数
 type DatabaseMigrateImportReq struct {
-	Env            string       `json:"env,omitempty"`             // 云环境ID
+	Env            string       `json:"env,omitempty"`             // 云环境 ID
 	CollectionName string       `json:"collection_name,omitempty"` // 集合名称
 	FilePath       string       `json:"file_path,omitempty"`       // 导出文件路径（文件会导出到同环境的云存储中，可使用获取下载链接 API 获取下载链接）
 	FileType       FileType     `json:"file_type,omitempty"`       // 导入文件类型，文件格式参考数据库导入指引中的文件格式部分  1:json 2:csv
@@ -79,7 +79,7 @@ type DatabaseMigrateImportReq struct {
 // DatabaseMigrateImportRes 数据库导入 返回结果
 type DatabaseMigrateImportRes struct {
 	util.CommonError
-	JobID int64 `json:"job_id"` // 导入任务ID，可使用数据库迁移进度查询 API 查询导入进度及结果
+	JobID int64 `json:"job_id"` // 导入任务 ID，可使用数据库迁移进度查询 API 查询导入进度及结果
 }
 
 // DatabaseMigrateQueryInfoRes 数据库迁移状态查询
@@ -94,7 +94,7 @@ type DatabaseMigrateQueryInfoRes struct {
 
 // UpdateIndexReq 变更数据库索引 请求参数
 type UpdateIndexReq struct {
-	Env            string        `json:"env,omitempty"`             // 云环境ID
+	Env            string        `json:"env,omitempty"`             // 云环境 ID
 	CollectionName string        `json:"collection_name,omitempty"` // 集合名称
 	CreateIndexes  []CreateIndex `json:"create_indexes,omitempty"`  // 新增索引
 	DropIndexes    []DropIndex   `json:"drop_indexes,omitempty"`    // 删除索引
@@ -120,13 +120,13 @@ type DropIndex struct {
 
 // DatabaseCollectionReq 新增/删除集合请求参数
 type DatabaseCollectionReq struct {
-	Env            string `json:"env,omitempty"`             // 云环境ID
+	Env            string `json:"env,omitempty"`             // 云环境 ID
 	CollectionName string `json:"collection_name,omitempty"` // 集合名称
 }
 
 // DatabaseCollectionGetReq 获取特定云环境下集合信息请求
 type DatabaseCollectionGetReq struct {
-	Env    string `json:"env,omitempty"`    // 云环境ID
+	Env    string `json:"env,omitempty"`    // 云环境 ID
 	Limit  int64  `json:"limit,omitempty"`  // 获取数量限制
 	Offset int64  `json:"offset,omitempty"` // 偏移量
 }
@@ -150,7 +150,7 @@ type DatabaseCollectionGetRes struct {
 
 // DatabaseReq 数据库插入/删除/更新/查询/统计记录请求参数
 type DatabaseReq struct {
-	Env   string `json:"env,omitempty"`   // 云环境ID
+	Env   string `json:"env,omitempty"`   // 云环境 ID
 	Query string `json:"query,omitempty"` // 数据库操作语句
 }
 
@@ -170,7 +170,7 @@ type DatabaseDeleteRes struct {
 type DatabaseUpdateRes struct {
 	util.CommonError
 	Matched  int64  `json:"matched"`  // 更新条件匹配到的结果数
-	Modified int64  `json:"modified"` // 修改的记录数，注意：使用set操作新插入的数据不计入修改数目
+	Modified int64  `json:"modified"` // 修改的记录数，注意：使用 set 操作新插入的数据不计入修改数目
 	ID       string `json:"id"`
 }
 

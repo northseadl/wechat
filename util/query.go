@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Query 将Map序列化为Query参数
+// Query 将 Map 序列化为 Query 参数
 func Query(params map[string]interface{}) string {
 	finalString := make([]string, 0)
 	for key, value := range params {

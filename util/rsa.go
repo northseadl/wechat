@@ -25,7 +25,10 @@ func RSADecrypt(privateKey string, ciphertext []byte) ([]byte, error) {
 		}
 		switch t := key.(type) {
 		case *rsa.PrivateKey:
-			priv = key.(*rsa.PrivateKey)
+			var ok bool
+			if priv, ok = key.(*rsa.PrivateKey); !ok {
+				return nil, fmt.Errorf(" ParsePKCS8PrivateKey error: Not supported privatekey format, should be *rsa.PrivateKey, got %T", t)
+			}
 		default:
 			return nil, fmt.Errorf("ParsePKCS1PrivateKey error: %s, ParsePKCS8PrivateKey error: Not supported privatekey format, should be *rsa.PrivateKey, got %T", oldErr.Error(), t)
 		}
@@ -33,7 +36,7 @@ func RSADecrypt(privateKey string, ciphertext []byte) ([]byte, error) {
 	return rsa.DecryptPKCS1v15(rand.Reader, priv, ciphertext)
 }
 
-// RSADecryptBase64 Base64解码后再次进行RSA解密
+// RSADecryptBase64 Base64 解码后再次进行 RSA 解密
 func RSADecryptBase64(privateKey string, cryptoText string) ([]byte, error) {
 	encryptedData, err := base64.StdEncoding.DecodeString(cryptoText)
 	if err != nil {

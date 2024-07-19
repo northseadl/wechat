@@ -17,15 +17,15 @@ import (
 	"golang.org/x/crypto/pkcs12"
 )
 
-// URIModifier URI修改器
+// URIModifier URI 修改器
 type URIModifier func(uri string) string
 
 var uriModifier URIModifier
 
-// DefaultHTTPClient 默认httpClient
+// DefaultHTTPClient 默认 httpClient
 var DefaultHTTPClient = http.DefaultClient
 
-// SetURIModifier 设置URI修改器
+// SetURIModifier 设置 URI 修改器
 func SetURIModifier(fn URIModifier) {
 	uriModifier = fn
 }

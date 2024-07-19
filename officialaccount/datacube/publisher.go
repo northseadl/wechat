@@ -22,7 +22,7 @@ const (
 	SlotIDBizSponsor AdSlot = "SLOT_ID_BIZ_SPONSOR"
 	// SlotIDBizCps 公众号返佣商品
 	SlotIDBizCps AdSlot = "SLOT_ID_BIZ_CPS"
-	// SlotIDWeappBanner 小程序banner
+	// SlotIDWeappBanner 小程序 banner
 	SlotIDWeappBanner AdSlot = "SLOT_ID_WEAPP_BANNER"
 	// SlotIDWeappRewardVideo 小程序激励视频
 	SlotIDWeappRewardVideo AdSlot = "SLOT_ID_WEAPP_REWARD_VIDEO"

@@ -83,12 +83,12 @@ type ExtattrItem struct {
 	Web   ExtattrItemWeb  `json:"web,omitempty"`
 }
 
-// ExtattrItemText 互联企业成员详细信息自定义属性(文本)
+// ExtattrItemText 互联企业成员详细信息自定义属性 (文本)
 type ExtattrItemText struct {
 	Value string `json:"value"`
 }
 
-// ExtattrItemWeb 互联企业成员详细信息自定义属性(网页)
+// ExtattrItemWeb 互联企业成员详细信息自定义属性 (网页)
 type ExtattrItemWeb struct {
 	URL   string `json:"url"`
 	Title string `json:"title"`

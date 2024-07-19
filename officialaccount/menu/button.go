@@ -23,7 +23,7 @@ func (btn *Button) SetSubButton(name string, subButtons []*Button) *Button {
 	return btn
 }
 
-// SetClickButton btn 为click类型
+// SetClickButton btn 为 click 类型
 func (btn *Button) SetClickButton(name, key string) *Button {
 	btn.Type = "click"
 	btn.Name = name
@@ -34,7 +34,7 @@ func (btn *Button) SetClickButton(name, key string) *Button {
 	return btn
 }
 
-// SetViewButton view类型
+// SetViewButton view 类型
 func (btn *Button) SetViewButton(name, url string) *Button {
 	btn.Type = "view"
 	btn.Name = name
@@ -116,7 +116,7 @@ func (btn *Button) SetLocationSelectButton(name, key string) *Button {
 	return btn
 }
 
-// SetMediaIDButton  设置 下发消息(除文本消息) 类型按钮
+// SetMediaIDButton  设置 下发消息 (除文本消息) 类型按钮
 func (btn *Button) SetMediaIDButton(name, mediaID string) *Button {
 	btn.Type = "media_id"
 	btn.Name = name
@@ -128,7 +128,7 @@ func (btn *Button) SetMediaIDButton(name, mediaID string) *Button {
 	return btn
 }
 
-// SetViewLimitedButton  设置 跳转图文消息URL 类型按钮
+// SetViewLimitedButton  设置 跳转图文消息 URL 类型按钮
 func (btn *Button) SetViewLimitedButton(name, mediaID string) *Button {
 	btn.Type = "view_limited"
 	btn.Name = name
@@ -159,12 +159,12 @@ func NewSubButton(name string, subButtons []*Button) *Button {
 	return (&Button{}).SetSubButton(name, subButtons)
 }
 
-// NewClickButton btn 为click类型
+// NewClickButton btn 为 click 类型
 func NewClickButton(name, key string) *Button {
 	return (&Button{}).SetClickButton(name, key)
 }
 
-// NewViewButton view类型
+// NewViewButton view 类型
 func NewViewButton(name, url string) *Button {
 	return (&Button{}).SetViewButton(name, url)
 }
@@ -199,12 +199,12 @@ func NewLocationSelectButton(name, key string) *Button {
 	return (&Button{}).SetLocationSelectButton(name, key)
 }
 
-// NewMediaIDButton  下发消息(除文本消息) 类型按钮
+// NewMediaIDButton  下发消息 (除文本消息) 类型按钮
 func NewMediaIDButton(name, mediaID string) *Button {
 	return (&Button{}).SetMediaIDButton(name, mediaID)
 }
 
-// NewViewLimitedButton  跳转图文消息URL 类型按钮
+// NewViewLimitedButton  跳转图文消息 URL 类型按钮
 func NewViewLimitedButton(name, mediaID string) *Button {
 	return (&Button{}).SetViewLimitedButton(name, mediaID)
 }

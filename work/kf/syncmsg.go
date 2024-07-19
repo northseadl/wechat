@@ -16,11 +16,11 @@ const (
 
 // SyncMsgOptions 获取消息查询参数
 type SyncMsgOptions struct {
-	Cursor      string `json:"cursor"`                 // 上一次调用时返回的next_cursor，第一次拉取可以不填, 不多于64字节
-	Token       string `json:"token"`                  // 回调事件返回的token字段，10分钟内有效；可不填，如果不填接口有严格的频率限制, 不多于128字节
-	Limit       uint   `json:"limit"`                  // 期望请求的数据量，默认值和最大值都为1000, 注意：可能会出现返回条数少于limit的情况，需结合返回的has_more字段判断是否继续请求。
-	VoiceFormat uint   `json:"voice_format,omitempty"` // 语音消息类型，0-Amr 1-Silk，默认0。可通过该参数控制返回的语音格式，开发者可按需选择自己程序支持的一种格式
-	OpenKfID    string `json:"open_kfid,omitempty"`    // 指定拉取某个客服帐号的消息，否则默认返回有权限的客服帐号的消息。当客服帐号较多，建议按open_kfid来拉取以获取更好的性能。
+	Cursor      string `json:"cursor"`                 // 上一次调用时返回的 next_cursor，第一次拉取可以不填，不多于 64 字节
+	Token       string `json:"token"`                  // 回调事件返回的 token 字段，10 分钟内有效；可不填，如果不填接口有严格的频率限制，不多于 128 字节
+	Limit       uint   `json:"limit"`                  // 期望请求的数据量，默认值和最大值都为 1000, 注意：可能会出现返回条数少于 limit 的情况，需结合返回的 has_more 字段判断是否继续请求。
+	VoiceFormat uint   `json:"voice_format,omitempty"` // 语音消息类型，0-Amr 1-Silk，默认 0。可通过该参数控制返回的语音格式，开发者可按需选择自己程序支持的一种格式
+	OpenKfID    string `json:"open_kfid,omitempty"`    // 指定拉取某个客服帐号的消息，否则默认返回有权限的客服帐号的消息。当客服帐号较多，建议按 open_kfid 来拉取以获取更好的性能。
 }
 
 // SyncMsgSchema 获取消息查询响应内容
@@ -28,7 +28,7 @@ type syncMsgSchema struct {
 	ErrCode    int32                    `json:"errcode"`     // 返回码
 	ErrMsg     string                   `json:"errmsg"`      // 错误码描述
 	NextCursor string                   `json:"next_cursor"` // 下次调用带上该值，则从当前的位置继续往后拉，以实现增量拉取。强烈建议对改该字段入库保存，每次请求读取带上，请求结束后更新。避免因意外丢，导致必须从头开始拉取，引起消息延迟。
-	HasMore    uint32                   `json:"has_more"`    // 是否还有更多数据。0-否；1-是。不能通过判断msg_list是否空来停止拉取，可能会出现has_more为1，而msg_list为空的情况
+	HasMore    uint32                   `json:"has_more"`    // 是否还有更多数据。0-否；1-是。不能通过判断 msg_list 是否空来停止拉取，可能会出现 has_more 为 1，而 msg_list 为空的情况
 	MsgList    []map[string]interface{} `json:"msg_list"`    // 消息列表
 }
 
@@ -36,8 +36,8 @@ type syncMsgSchema struct {
 type SyncMsgSchema struct {
 	ErrCode    int32             `json:"errcode"`     // 返回码
 	ErrMsg     string            `json:"errmsg"`      // 错误码描述
-	NextCursor string            `json:"next_cursor"` // 下次调用带上该值则从该key值往后拉，用于增量拉取
-	HasMore    uint32            `json:"has_more"`    // 是否还有更多数据。0-否；1-是。不能通过判断msg_list是否空来停止拉取，可能会出现has_more为1，而msg_list为空的情况
+	NextCursor string            `json:"next_cursor"` // 下次调用带上该值则从该 key 值往后拉，用于增量拉取
+	HasMore    uint32            `json:"has_more"`    // 是否还有更多数据。0-否；1-是。不能通过判断 msg_list 是否空来停止拉取，可能会出现 has_more 为 1，而 msg_list 为空的情况
 	MsgList    []syncmsg.Message `json:"msg_list"`    // 消息列表
 }
 

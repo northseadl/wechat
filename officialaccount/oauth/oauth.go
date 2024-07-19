@@ -32,14 +32,14 @@ func NewOauth(context *context.Context) *Oauth {
 	return auth
 }
 
-// GetRedirectURL 获取跳转的url地址
+// GetRedirectURL 获取跳转的 url 地址
 func (oauth *Oauth) GetRedirectURL(redirectURI, scope, state string) (string, error) {
 	// url encode
 	urlStr := url.QueryEscape(redirectURI)
 	return fmt.Sprintf(redirectOauthURL, oauth.AppID, urlStr, scope, state), nil
 }
 
-// GetWebAppRedirectURL 获取网页应用跳转的url地址
+// GetWebAppRedirectURL 获取网页应用跳转的 url 地址
 func (oauth *Oauth) GetWebAppRedirectURL(redirectURI, scope, state string) (string, error) {
 	urlStr := url.QueryEscape(redirectURI)
 	return fmt.Sprintf(webAppRedirectOauthURL, oauth.AppID, urlStr, scope, state), nil
@@ -55,7 +55,7 @@ func (oauth *Oauth) Redirect(writer http.ResponseWriter, req *http.Request, redi
 	return nil
 }
 
-// ResAccessToken 获取用户授权access_token的返回结果
+// ResAccessToken 获取用户授权 access_token 的返回结果
 type ResAccessToken struct {
 	util.CommonError
 
@@ -65,7 +65,7 @@ type ResAccessToken struct {
 	OpenID       string `json:"openid"`
 	Scope        string `json:"scope"`
 
-	// IsSnapShotUser 是否为快照页模式虚拟账号，只有当用户是快照页模式虚拟账号时返回，值为1
+	// IsSnapShotUser 是否为快照页模式虚拟账号，只有当用户是快照页模式虚拟账号时返回，值为 1
 	// 公众号文档 https://developers.weixin.qq.com/community/minihome/doc/000c2c34068880629ced91a2f56001
 	IsSnapShotUser int `json:"is_snapshotuser"`
 
@@ -74,7 +74,7 @@ type ResAccessToken struct {
 	UnionID string `json:"unionid"`
 }
 
-// GetUserInfoByCodeContext 通过网页授权的code 换取用户的信息
+// GetUserInfoByCodeContext 通过网页授权的 code 换取用户的信息
 func (oauth *Oauth) GetUserInfoByCodeContext(ctx ctx2.Context, code string) (result UserInfo, err error) {
 	var (
 		token ResAccessToken
@@ -86,12 +86,12 @@ func (oauth *Oauth) GetUserInfoByCodeContext(ctx ctx2.Context, code string) (res
 	return oauth.GetUserInfoContext(ctx, token.AccessToken, token.OpenID, "")
 }
 
-// GetUserAccessToken 通过网页授权的code 换取access_token(区别于context中的access_token)
+// GetUserAccessToken 通过网页授权的 code 换取 access_token(区别于 context 中的 access_token)
 func (oauth *Oauth) GetUserAccessToken(code string) (result ResAccessToken, err error) {
 	return oauth.GetUserAccessTokenContext(ctx2.Background(), code)
 }
 
-// GetUserAccessTokenContext 通过网页授权的code 换取access_token(区别于context中的access_token) with context
+// GetUserAccessTokenContext 通过网页授权的 code 换取 access_token(区别于 context 中的 access_token) with context
 func (oauth *Oauth) GetUserAccessTokenContext(ctx ctx2.Context, code string) (result ResAccessToken, err error) {
 	urlStr := fmt.Sprintf(accessTokenURL, oauth.AppID, oauth.AppSecret, code)
 	var response []byte
@@ -110,12 +110,12 @@ func (oauth *Oauth) GetUserAccessTokenContext(ctx ctx2.Context, code string) (re
 	return
 }
 
-// RefreshAccessToken 刷新access_token
+// RefreshAccessToken 刷新 access_token
 func (oauth *Oauth) RefreshAccessToken(refreshToken string) (result ResAccessToken, err error) {
 	return oauth.RefreshAccessTokenContext(ctx2.Background(), refreshToken)
 }
 
-// RefreshAccessTokenContext 刷新access_token with context
+// RefreshAccessTokenContext 刷新 access_token with context
 func (oauth *Oauth) RefreshAccessTokenContext(ctx ctx2.Context, refreshToken string) (result ResAccessToken, err error) {
 	urlStr := fmt.Sprintf(refreshAccessTokenURL, oauth.AppID, refreshToken)
 	var response []byte
@@ -134,12 +134,12 @@ func (oauth *Oauth) RefreshAccessTokenContext(ctx ctx2.Context, refreshToken str
 	return
 }
 
-// CheckAccessToken 检验access_token是否有效
+// CheckAccessToken 检验 access_token 是否有效
 func (oauth *Oauth) CheckAccessToken(accessToken, openID string) (b bool, err error) {
 	return oauth.CheckAccessTokenContext(ctx2.Background(), accessToken, openID)
 }
 
-// CheckAccessTokenContext 检验access_token是否有效 with context
+// CheckAccessTokenContext 检验 access_token 是否有效 with context
 func (oauth *Oauth) CheckAccessTokenContext(ctx ctx2.Context, accessToken, openID string) (b bool, err error) {
 	urlStr := fmt.Sprintf(checkAccessTokenURL, accessToken, openID)
 	var response []byte
@@ -175,12 +175,12 @@ type UserInfo struct {
 	Unionid    string   `json:"unionid"`
 }
 
-// GetUserInfo 如果scope为 snsapi_userinfo 则可以通过此方法获取到用户基本信息
+// GetUserInfo 如果 scope 为 snsapi_userinfo 则可以通过此方法获取到用户基本信息
 func (oauth *Oauth) GetUserInfo(accessToken, openID, lang string) (result UserInfo, err error) {
 	return oauth.GetUserInfoContext(ctx2.Background(), accessToken, openID, lang)
 }
 
-// GetUserInfoContext 如果scope为 snsapi_userinfo 则可以通过此方法获取到用户基本信息 with context
+// GetUserInfoContext 如果 scope 为 snsapi_userinfo 则可以通过此方法获取到用户基本信息 with context
 func (oauth *Oauth) GetUserInfoContext(ctx ctx2.Context, accessToken, openID, lang string) (result UserInfo, err error) {
 	if lang == "" {
 		lang = "zh_CN"

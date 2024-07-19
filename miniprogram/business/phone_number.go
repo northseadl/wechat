@@ -21,12 +21,12 @@ type PhoneInfo struct {
 	PurePhoneNumber string `json:"purePhoneNumber"` // 没有区号的手机号
 	CountryCode     string `json:"countryCode"`     // 区号
 	Watermark       struct {
-		AppID     string `json:"appid"`     // 小程序appid
+		AppID     string `json:"appid"`     // 小程序 appid
 		Timestamp int64  `json:"timestamp"` // 用户获取手机号操作的时间戳
 	} `json:"watermark"`
 }
 
-// GetPhoneNumber code换取用户手机号。 每个code只能使用一次，code的有效期为5min
+// GetPhoneNumber code 换取用户手机号。每个 code 只能使用一次，code 的有效期为 5min
 func (business *Business) GetPhoneNumber(in *GetPhoneNumberRequest) (info PhoneInfo, err error) {
 	accessToken, err := business.GetAccessToken()
 	if err != nil {

@@ -26,7 +26,7 @@ type UserRiskRankRequest struct {
 	AppID    string `json:"appid"`     // 小程序 app id
 	OpenID   string `json:"openid"`    // 用户的 openid
 	Scene    uint8  `json:"scene"`     // 场景值，0:注册，1:营销作弊
-	ClientIP string `json:"client_ip"` // 用户访问源ip
+	ClientIP string `json:"client_ip"` // 用户访问源 ip
 
 	Mobile       string `json:"mobile_no"`     // 用户手机号
 	Email        string `json:"email_address"` // 用户邮箱地址

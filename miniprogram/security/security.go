@@ -26,13 +26,13 @@ func NewSecurity(ctx *context.Context) *Security {
 
 // MediaCheckAsyncV1Request 图片/音频异步校验请求参数
 type MediaCheckAsyncV1Request struct {
-	MediaURL  string `json:"media_url"`  // 要检测的图片或音频的url，支持图片格式包括jpg, jepg, png, bmp, gif（取首帧），支持的音频格式包括mp3, aac, ac3, wma, flac, vorbis, opus, wav
+	MediaURL  string `json:"media_url"`  // 要检测的图片或音频的 url，支持图片格式包括 jpg, jepg, png, bmp, gif（取首帧），支持的音频格式包括 mp3, aac, ac3, wma, flac, vorbis, opus, wav
 	MediaType uint8  `json:"media_type"` // 1:音频;2:图片
 }
 
 // MediaCheckAsyncV1 异步校验图片/音频是否含有违法违规内容
 // Deprecated
-// 在2021年9月1日停止更新，请尽快更新至 2.0 接口。建议使用 MediaCheckAsync
+// 在 2021 年 9 月 1 日停止更新，请尽快更新至 2.0 接口。建议使用 MediaCheckAsync
 func (security *Security) MediaCheckAsyncV1(in *MediaCheckAsyncV1Request) (traceID string, err error) {
 	accessToken, err := security.GetAccessToken()
 	if err != nil {
@@ -56,9 +56,9 @@ func (security *Security) MediaCheckAsyncV1(in *MediaCheckAsyncV1Request) (trace
 
 // MediaCheckAsyncRequest 图片/音频异步校验请求参数
 type MediaCheckAsyncRequest struct {
-	MediaURL  string `json:"media_url"`  // 要检测的图片或音频的url，支持图片格式包括jpg, jepg, png, bmp, gif（取首帧），支持的音频格式包括mp3, aac, ac3, wma, flac, vorbis, opus, wav
+	MediaURL  string `json:"media_url"`  // 要检测的图片或音频的 url，支持图片格式包括 jpg, jepg, png, bmp, gif（取首帧），支持的音频格式包括 mp3, aac, ac3, wma, flac, vorbis, opus, wav
 	MediaType uint8  `json:"media_type"` // 1:音频;2:图片
-	OpenID    string `json:"openid"`     // 用户的openid（用户需在近两小时访问过小程序）
+	OpenID    string `json:"openid"`     // 用户的 openid（用户需在近两小时访问过小程序）
 	Scene     uint8  `json:"scene"`      // 场景枚举值（1 资料；2 评论；3 论坛；4 社交日志）
 }
 
@@ -71,7 +71,7 @@ func (security *Security) MediaCheckAsync(in *MediaCheckAsyncRequest) (traceID s
 
 	var req struct {
 		MediaCheckAsyncRequest
-		Version uint `json:"version"` // 接口版本号，2.0版本为固定值2
+		Version uint `json:"version"` // 接口版本号，2.0 版本为固定值 2
 	}
 	req.MediaCheckAsyncRequest = *in
 	req.Version = 2
@@ -94,7 +94,7 @@ func (security *Security) MediaCheckAsync(in *MediaCheckAsyncRequest) (traceID s
 // ImageCheckV1 校验一张图片是否含有违法违规内容（同步）
 // https://developers.weixin.qq.com/miniprogram/dev/framework/security.imgSecCheck.html
 // Deprecated
-// 在2021年9月1日停止更新。建议使用 MediaCheckAsync
+// 在 2021 年 9 月 1 日停止更新。建议使用 MediaCheckAsync
 func (security *Security) ImageCheckV1(filename string) (err error) {
 	accessToken, err := security.GetAccessToken()
 	if err != nil {
@@ -169,12 +169,12 @@ func (cl CheckLabel) String() string {
 
 // MsgCheckRequest 文本检查请求
 type MsgCheckRequest struct {
-	OpenID    string   `json:"openid"`    // 用户的openid（用户需在近两小时访问过小程序）
+	OpenID    string   `json:"openid"`    // 用户的 openid（用户需在近两小时访问过小程序）
 	Scene     MsgScene `json:"scene"`     // 场景枚举值（1 资料；2 评论；3 论坛；4 社交日志）
 	Content   string   `json:"content"`   // 需检测的文本内容，文本字数的上限为 2500 字，需使用 UTF-8 编码
-	Nickname  string   `json:"nickname"`  // （非必填）用户昵称，需使用UTF-8编码
-	Title     string   `json:"title"`     // （非必填）文本标题，需使用UTF-8编码
-	Signature string   `json:"signature"` // （非必填）个性签名，该参数仅在资料类场景有效(scene=1)，需使用UTF-8编码
+	Nickname  string   `json:"nickname"`  // （非必填）用户昵称，需使用 UTF-8 编码
+	Title     string   `json:"title"`     // （非必填）文本标题，需使用 UTF-8 编码
+	Signature string   `json:"signature"` // （非必填）个性签名，该参数仅在资料类场景有效 (scene=1)，需使用 UTF-8 编码
 }
 
 // MsgCheckResponse 文本检查响应
@@ -186,7 +186,7 @@ type MsgCheckResponse struct {
 		Label   CheckLabel   `json:"label"`   // 命中标签
 	} `json:"result"` // 综合结果
 	Detail []struct {
-		ErrCode  int64      `json:"errcode"`  // 错误码，仅当该值为0时，该项结果有效
+		ErrCode  int64      `json:"errcode"`  // 错误码，仅当该值为 0 时，该项结果有效
 		Strategy string     `json:"strategy"` // 策略类型
 		Suggest  string     `json:"suggest"`  // 建议
 		Label    CheckLabel `json:"label"`    // 命中标签
@@ -197,7 +197,7 @@ type MsgCheckResponse struct {
 
 // MsgCheckV1 检查一段文本是否含有违法违规内容
 // Deprecated
-// 在2021年9月1日停止更新，请尽快更新至 2.0 接口。建议使用 MsgCheck
+// 在 2021 年 9 月 1 日停止更新，请尽快更新至 2.0 接口。建议使用 MsgCheck
 func (security *Security) MsgCheckV1(content string) (res MsgCheckResponse, err error) {
 	accessToken, err := security.GetAccessToken()
 	if err != nil {

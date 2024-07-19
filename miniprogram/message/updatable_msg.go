@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	// createActivityURL 创建activity_id
+	// createActivityURL 创建 activity_id
 	createActivityURL = "https://api.weixin.qq.com/cgi-bin/message/wxopen/activityid/create?access_token=%s"
 	// SendUpdatableMsgURL 修改动态消息
 	setUpdatableMsgURL = "https://api.weixin.qq.com/cgi-bin/message/wxopen/updatablemsg/send?access_token=%s"
@@ -38,7 +38,7 @@ func NewUpdatableMessage(ctx *context.Context) *UpdatableMessage {
 	}
 }
 
-// CreateActivityID 创建activity_id
+// CreateActivityID 创建 activity_id
 func (updatableMessage *UpdatableMessage) CreateActivityID() (res CreateActivityIDResponse, err error) {
 	accessToken, err := updatableMessage.GetAccessToken()
 	if err != nil {
@@ -75,7 +75,7 @@ func (updatableMessage *UpdatableMessage) SetUpdatableMsg(activityID string, tar
 	return util.DecodeWithCommonError(response, "SendUpdatableMsg")
 }
 
-// CreateActivityIDResponse 创建activity_id 返回
+// CreateActivityIDResponse 创建 activity_id 返回
 type CreateActivityIDResponse struct {
 	util.CommonError
 

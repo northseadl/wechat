@@ -24,13 +24,13 @@ func NewEncryptor(context *context.Context) *Encryptor {
 }
 
 var (
-	// ErrAppIDNotMatch appid不匹配
+	// ErrAppIDNotMatch appid 不匹配
 	ErrAppIDNotMatch = errors.New("app id not match")
-	// ErrInvalidBlockSize block size不合法
+	// ErrInvalidBlockSize block size 不合法
 	ErrInvalidBlockSize = errors.New("invalid block size")
-	// ErrInvalidPKCS7Data PKCS7数据不合法
+	// ErrInvalidPKCS7Data PKCS7 数据不合法
 	ErrInvalidPKCS7Data = errors.New("invalid PKCS7 data")
-	// ErrInvalidPKCS7Padding 输入padding失败
+	// ErrInvalidPKCS7Padding 输入 padding 失败
 	ErrInvalidPKCS7Padding = errors.New("invalid padding on input")
 )
 

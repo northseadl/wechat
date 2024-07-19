@@ -79,23 +79,23 @@ func (freePublish *FreePublish) Publish(mediaID string) (publishID int64, err er
 // PublishStatusList 发布任务状态列表
 type PublishStatusList struct {
 	util.CommonError
-	PublishID     int64                `json:"publish_id"`     // 发布任务id
+	PublishID     int64                `json:"publish_id"`     // 发布任务 id
 	PublishStatus PublishStatus        `json:"publish_status"` // 发布状态
-	ArticleID     string               `json:"article_id"`     // 当发布状态为0时（即成功）时，返回图文的 article_id，可用于“客服消息”场景
+	ArticleID     string               `json:"article_id"`     // 当发布状态为 0 时（即成功）时，返回图文的 article_id，可用于“客服消息”场景
 	ArticleDetail PublishArticleDetail `json:"article_detail"` // 发布任务文章成功状态详情
-	FailIndex     []uint               `json:"fail_idx"`       // 当发布状态为2或4时，返回不通过的文章编号，第一篇为 1；其他发布状态则为空
+	FailIndex     []uint               `json:"fail_idx"`       // 当发布状态为 2 或 4 时，返回不通过的文章编号，第一篇为 1；其他发布状态则为空
 }
 
 // PublishArticleDetail 发布任务成功详情
 type PublishArticleDetail struct {
-	Count uint                 `json:"count"` // 当发布状态为0时（即成功）时，返回文章数量
+	Count uint                 `json:"count"` // 当发布状态为 0 时（即成功）时，返回文章数量
 	Items []PublishArticleItem `json:"item"`
 }
 
 // PublishArticleItem 发布任务成功的文章内容
 type PublishArticleItem struct {
-	Index      uint   `json:"idx"`         // 当发布状态为0时（即成功）时，返回文章对应的编号
-	ArticleURL string `json:"article_url"` // 当发布状态为0时（即成功）时，返回图文的永久链接
+	Index      uint   `json:"idx"`         // 当发布状态为 0 时（即成功）时，返回文章对应的编号
+	ArticleURL string `json:"article_url"` // 当发布状态为 0 时（即成功）时，返回图文的永久链接
 }
 
 // SelectStatus 发布状态轮询接口
@@ -122,8 +122,8 @@ func (freePublish *FreePublish) SelectStatus(publishID int64) (list PublishStatu
 }
 
 // Delete 删除发布。
-// index 要删除的文章在图文消息中的位置，第一篇编号为1，该字段不填或填0会删除全部文章
-// !!!此操作不可逆，请谨慎操作!!!删除后微信公众号后台仍然会有记录!!!
+// index 要删除的文章在图文消息中的位置，第一篇编号为 1，该字段不填或填 0 会删除全部文章
+// !!! 此操作不可逆，请谨慎操作!!! 删除后微信公众号后台仍然会有记录!!!
 func (freePublish *FreePublish) Delete(articleID string, index uint) (err error) {
 	accessToken, err := freePublish.GetAccessToken()
 	if err != nil {
@@ -152,13 +152,13 @@ type Article struct {
 	Title              string `json:"title"`                 // 标题
 	Author             string `json:"author"`                // 作者
 	Digest             string `json:"digest"`                // 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
-	Content            string `json:"content"`               // 图文消息的具体内容，支持HTML标签，必须少于2万字符，小于1M，且此处会去除JS
-	ContentSourceURL   string `json:"content_source_url"`    // 图文消息的原文地址，即点击“阅读原文”后的URL
-	ThumbMediaID       string `json:"thumb_media_id"`        // 图文消息的封面图片素材id（一定是永久MediaID）
-	ShowCoverPic       uint   `json:"show_cover_pic"`        // 是否显示封面，0为false，即不显示，1为true，即显示(默认)
-	NeedOpenComment    uint   `json:"need_open_comment"`     // 是否打开评论，0不打开(默认)，1打开
-	OnlyFansCanComment uint   `json:"only_fans_can_comment"` // 是否粉丝才可评论，0所有人可评论(默认)，1粉丝才可评论
-	URL                string `json:"url"`                   // 图文消息的URL
+	Content            string `json:"content"`               // 图文消息的具体内容，支持 HTML 标签，必须少于 2 万字符，小于 1M，且此处会去除 JS
+	ContentSourceURL   string `json:"content_source_url"`    // 图文消息的原文地址，即点击“阅读原文”后的 URL
+	ThumbMediaID       string `json:"thumb_media_id"`        // 图文消息的封面图片素材 id（一定是永久 MediaID）
+	ShowCoverPic       uint   `json:"show_cover_pic"`        // 是否显示封面，0 为 false，即不显示，1 为 true，即显示 (默认)
+	NeedOpenComment    uint   `json:"need_open_comment"`     // 是否打开评论，0 不打开 (默认)，1 打开
+	OnlyFansCanComment uint   `json:"only_fans_can_comment"` // 是否粉丝才可评论，0 所有人可评论 (默认)，1 粉丝才可评论
+	URL                string `json:"url"`                   // 图文消息的 URL
 	IsDeleted          bool   `json:"is_deleted"`            // 该图文是否被删除
 }
 
@@ -199,7 +199,7 @@ type ArticleList struct {
 
 // ArticleListItem 用于 ArticleList 的 item 节点
 type ArticleListItem struct {
-	ArticleID  string             `json:"article_id"`  // 成功发布的图文消息id
+	ArticleID  string             `json:"article_id"`  // 成功发布的图文消息 id
 	Content    ArticleListContent `json:"content"`     // 内容
 	UpdateTime int64              `json:"update_time"` // 这篇图文消息素材的最后更新时间
 }

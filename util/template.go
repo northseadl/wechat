@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Template 对字符串中的和map的key相同的字符串进行模板替换 仅支持 形如: {name}
+// Template 对字符串中的和 map 的 key 相同的字符串进行模板替换 仅支持 形如：{name}
 func Template(source string, data map[string]interface{}) string {
 	sourceCopy := &source
 	for k, val := range data {

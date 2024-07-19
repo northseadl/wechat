@@ -14,7 +14,7 @@ const (
 // InvokeCloudFunctionRes 云函数调用返回结果
 type InvokeCloudFunctionRes struct {
 	util.CommonError
-	RespData string `json:"resp_data"` // 云函数返回的buffer
+	RespData string `json:"resp_data"` // 云函数返回的 buffer
 }
 
 // InvokeCloudFunction 云函数调用

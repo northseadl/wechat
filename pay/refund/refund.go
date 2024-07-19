@@ -29,7 +29,7 @@ type Params struct {
 	TotalFee      string
 	RefundFee     string
 	RefundDesc    string
-	RootCa        string // ca证书
+	RootCa        string // ca 证书
 	NotifyURL     string
 	SignType      string
 }

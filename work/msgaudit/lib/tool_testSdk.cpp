@@ -22,15 +22,15 @@ typedef void FreeMediaData_t(MediaData_t*);
 int main(int argc, char* argv[])
 {
     int ret = 0;
-	//seq 表示该企业存档消息序号，该序号单调递增，拉取序号建议设置为上次拉取返回结果中最大序号。首次拉取时seq传0，sdk会返回有效期内最早的消息。
-	//limit 表示本次拉取的最大消息条数，取值范围为1~1000
-	//proxy与passwd为代理参数，如果运行sdk的环境不能直接访问外网，需要配置代理参数。sdk访问的域名是"https://qyapi.weixin.qq.com"。
-	//建议先通过curl访问"https://qyapi.weixin.qq.com"，验证代理配置正确后，再传入sdk。
-	//timeout 为拉取会话存档的超时时间，单位为秒，建议超时时间设置为5s。
-	//sdkfileid 媒体文件id，从解密后的会话存档中得到
+	//seq 表示该企业存档消息序号，该序号单调递增，拉取序号建议设置为上次拉取返回结果中最大序号。首次拉取时 seq 传 0，sdk 会返回有效期内最早的消息。
+	//limit 表示本次拉取的最大消息条数，取值范围为 1~1000
+	//proxy 与 passwd 为代理参数，如果运行 sdk 的环境不能直接访问外网，需要配置代理参数。sdk 访问的域名是"https://qyapi.weixin.qq.com"。
+	//建议先通过 curl 访问"https://qyapi.weixin.qq.com"，验证代理配置正确后，再传入 sdk。
+	//timeout 为拉取会话存档的超时时间，单位为秒，建议超时时间设置为 5s。
+	//sdkfileid 媒体文件 id，从解密后的会话存档中得到
 	//savefile 媒体文件保存路径
-	//encrypt_key 拉取会话存档返回的encrypt_random_key，使用配置在企业微信管理台的rsa公钥对应的私钥解密后得到encrypt_key。
-	//encrypt_chat_msg 拉取会话存档返回的encrypt_chat_msg
+	//encrypt_key 拉取会话存档返回的 encrypt_random_key，使用配置在企业微信管理台的 rsa 公钥对应的私钥解密后得到 encrypt_key。
+	//encrypt_chat_msg 拉取会话存档返回的 encrypt_chat_msg
     if (argc < 2) {
         printf("./sdktools 1(chatmsg) 2(mediadata) 3(decryptdata)\n");
         printf("./sdktools 1 seq limit proxy passwd timeout\n");
@@ -47,14 +47,14 @@ int main(int argc, char* argv[])
     newsdk_t* newsdk_fn = (newsdk_t*)dlsym(so_handle, "NewSdk");
     WeWorkFinanceSdk_t* sdk = newsdk_fn();
 
-	//使用sdk前需要初始化，初始化成功后的sdk可以一直使用。
-	//如需并发调用sdk，建议每个线程持有一个sdk实例。
-	//初始化时请填入自己企业的corpid与secrectkey。
+	//使用 sdk 前需要初始化，初始化成功后的 sdk 可以一直使用。
+	//如需并发调用 sdk，建议每个线程持有一个 sdk 实例。
+	//初始化时请填入自己企业的 corpid 与 secrectkey。
     Init_t* init_fn = (Init_t*)dlsym(so_handle, "Init");
     DestroySdk_t* destroysdk_fn = (DestroySdk_t*)dlsym(so_handle, "DestroySdk");
     ret = init_fn(sdk, "wwd08c8e7c775ab44d", "zJ6k0naVVQ--gt9PUSSEvs03zW_nlDVmjLCTOTAfrew");
     if (ret != 0) {
-        //sdk需要主动释放
+        //sdk 需要主动释放
         destroysdk_fn(sdk);
         printf("init sdk err ret:%d\n", ret);
         return -1;
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
         NewSlice_t* newslice_fn = (NewSlice_t*)dlsym(so_handle, "NewSlice");
         FreeSlice_t* freeslice_fn = (FreeSlice_t*)dlsym(so_handle, "FreeSlice");
 
-		//每次使用GetChatData拉取存档前需要调用NewSlice获取一个chatDatas，在使用完chatDatas中数据后，还需要调用FreeSlice释放。
+		//每次使用 GetChatData 拉取存档前需要调用 NewSlice 获取一个 chatDatas，在使用完 chatDatas 中数据后，还需要调用 FreeSlice 释放。
         Slice_t* chatDatas = newslice_fn();
         GetChatData_t* getchatdata_fn = (GetChatData_t*)dlsym(so_handle, "GetChatData");
         ret = getchatdata_fn(sdk, iSeq, iLimit, argv[4], argv[5], timeout, chatDatas);
@@ -92,10 +92,10 @@ int main(int argc, char* argv[])
         NewMediaData_t* newmediadata_fn = (NewMediaData_t*)dlsym(so_handle, "NewMediaData");
         FreeMediaData_t* freemediadata_fn = (FreeMediaData_t*)dlsym(so_handle, "FreeMediaData");
 
-		//媒体文件每次拉取的最大size为512k，因此超过512k的文件需要分片拉取。若该文件未拉取完整，mediaData中的is_finish会返回0，同时mediaData中的outindexbuf会返回下次拉取需要传入GetMediaData的indexbuf。
-		//indexbuf一般格式如右侧所示，”Range:bytes=524288-1048575“，表示这次拉取的是从524288到1048575的分片。单个文件首次拉取填写的indexbuf为空字符串，拉取后续分片时直接填入上次返回的indexbuf即可。
+		//媒体文件每次拉取的最大 size 为 512k，因此超过 512k 的文件需要分片拉取。若该文件未拉取完整，mediaData 中的 is_finish 会返回 0，同时 mediaData 中的 outindexbuf 会返回下次拉取需要传入 GetMediaData 的 indexbuf。
+		//indexbuf 一般格式如右侧所示，”Range:bytes=524288-1048575“，表示这次拉取的是从 524288 到 1048575 的分片。单个文件首次拉取填写的 indexbuf 为空字符串，拉取后续分片时直接填入上次返回的 indexbuf 即可。
         while (isfinish == 0) {
-            //每次使用GetMediaData拉取存档前需要调用NewMediaData获取一个mediaData，在使用完mediaData中数据后，还需要调用FreeMediaData释放。
+            //每次使用 GetMediaData 拉取存档前需要调用 NewMediaData 获取一个 mediaData，在使用完 mediaData 中数据后，还需要调用 FreeMediaData 释放。
             printf("index:%s\n", index.c_str());
             MediaData_t* mediaData = newmediadata_fn();
             ret = getmediadata_fn(sdk, index.c_str(), argv[2], argv[3], argv[4], timeout, mediaData);
@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
             }
             printf("content size:%d isfin:%d outindex:%s\n", mediaData->data_len, mediaData->is_finish, mediaData->outindexbuf);
 
-			//大于512k的文件会分片拉取，此处需要使用追加写，避免后面的分片覆盖之前的数据。
+			//大于 512k 的文件会分片拉取，此处需要使用追加写，避免后面的分片覆盖之前的数据。
             char file[200];
             snprintf(file, sizeof(file), "%s", argv[6]);
             FILE* fp = fopen(file, "ab+");
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
             fwrite(mediaData->data, mediaData->data_len, 1, fp);
             fclose(fp);
 
-            //获取下次拉取需要使用的indexbuf
+            //获取下次拉取需要使用的 indexbuf
             index.assign(string(mediaData->outindexbuf));
             isfinish = mediaData->is_finish;
             freemediadata_fn(mediaData);
@@ -129,9 +129,9 @@ int main(int argc, char* argv[])
     } 
     else if (type == 3) {
 		//解密会话存档内容
-		//sdk不会要求用户传入rsa私钥，保证用户会话存档数据只有自己能够解密。
-		//此处需要用户先用rsa私钥解密encrypt_random_key后，作为encrypt_key参数传入sdk来解密encrypt_chat_msg获取会话存档明文。
-		//每次使用DecryptData解密会话存档前需要调用NewSlice获取一个Msgs，在使用完Msgs中数据后，还需要调用FreeSlice释放。
+		//sdk 不会要求用户传入 rsa 私钥，保证用户会话存档数据只有自己能够解密。
+		//此处需要用户先用 rsa 私钥解密 encrypt_random_key 后，作为 encrypt_key 参数传入 sdk 来解密 encrypt_chat_msg 获取会话存档明文。
+		//每次使用 DecryptData 解密会话存档前需要调用 NewSlice 获取一个 Msgs，在使用完 Msgs 中数据后，还需要调用 FreeSlice 释放。
         NewSlice_t* newslice_fn = (NewSlice_t*)dlsym(so_handle, "NewSlice");
         FreeSlice_t* freeslice_fn = (FreeSlice_t*)dlsym(so_handle, "FreeSlice");
 

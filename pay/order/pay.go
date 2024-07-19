@@ -35,7 +35,7 @@ type Params struct {
 	CreateIP   string
 	Body       string
 	OutTradeNo string
-	TimeExpire string // 订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。
+	TimeExpire string // 订单失效时间，格式为 yyyyMMddHHmmss，如 2009 年 12 月 27 日 9 点 10 分 10 秒表示为 20091227091010。
 	OpenID     string
 	TradeType  string
 	SignType   string
@@ -85,7 +85,7 @@ type PreOrder struct {
 
 // payRequest 接口请求参数
 type payRequest struct {
-	AppID          string `xml:"appid"`                 // 公众账号ID
+	AppID          string `xml:"appid"`                 // 公众账号 ID
 	MchID          string `xml:"mch_id"`                // 商户号
 	DeviceInfo     string `xml:"device_info,omitempty"` // 设备号
 	NonceStr       string `xml:"nonce_str"`             // 随机字符串
@@ -97,13 +97,13 @@ type payRequest struct {
 	OutTradeNo     string `xml:"out_trade_no"`          // 商户订单号
 	FeeType        string `xml:"fee_type,omitempty"`    // 标价币种
 	TotalFee       string `xml:"total_fee"`             // 标价金额
-	SpbillCreateIP string `xml:"spbill_create_ip"`      // 终端IP
+	SpbillCreateIP string `xml:"spbill_create_ip"`      // 终端 IP
 	TimeStart      string `xml:"time_start,omitempty"`  // 交易起始时间
 	TimeExpire     string `xml:"time_expire,omitempty"` // 交易结束时间
 	GoodsTag       string `xml:"goods_tag,omitempty"`   // 订单优惠标记
 	NotifyURL      string `xml:"notify_url"`            // 通知地址
 	TradeType      string `xml:"trade_type"`            // 交易类型
-	ProductID      string `xml:"product_id,omitempty"`  // 商品ID
+	ProductID      string `xml:"product_id,omitempty"`  // 商品 ID
 	LimitPay       string `xml:"limit_pay,omitempty"`   // 指定支付方式
 	OpenID         string `xml:"openid,omitempty"`      // 用户标识
 	SceneInfo      string `xml:"scene_info,omitempty"`  // 场景信息
@@ -213,7 +213,7 @@ func (o *Order) PrePayOrder(p *Params) (payOrder PreOrder, err error) {
 
 	// 通知地址
 	if len(p.NotifyURL) == 0 {
-		p.NotifyURL = o.NotifyURL // 默认使用order.NotifyURL
+		p.NotifyURL = o.NotifyURL // 默认使用 order.NotifyURL
 	}
 
 	// 签名类型

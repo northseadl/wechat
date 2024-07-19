@@ -17,7 +17,7 @@ type Oauth struct {
 var (
 	// oauthTargetURL 企业微信内跳转地址
 	oauthTargetURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
-	// oauthTargetURL 企业微信内跳转地址(获取成员的详细信息)
+	// oauthTargetURL 企业微信内跳转地址 (获取成员的详细信息)
 	oauthTargetPrivateURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_privateinfo&agentid=%s&state=STATE#wechat_redirect"
 	// oauthUserInfoURL 获取用户信息地址
 	oauthUserInfoURL = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=%s&code=%s"
@@ -80,7 +80,7 @@ type ResUserInfo struct {
 	ExternalUserID string `json:"external_userid"`
 }
 
-// UserFromCode 根据code获取用户信息
+// UserFromCode 根据 code 获取用户信息
 func (ctr *Oauth) UserFromCode(code string) (result ResUserInfo, err error) {
 	var accessToken string
 	if accessToken, err = ctr.GetAccessToken(); err != nil {

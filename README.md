@@ -5,12 +5,12 @@
 [![pkg](https://img.shields.io/badge/dev-reference-007d9c?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/silenceper/wechat/v2?tab=doc)
 ![version](https://img.shields.io/badge/version-v2-green)
 
-使用Golang开发的微信SDK，简单、易用。
-> 注意：当前版本为v2版本，v1版本已废弃
+使用 Golang 开发的微信 SDK，简单、易用。
+> 注意：当前版本为 v2 版本，v1 版本已废弃
 
 ## 文档 && 例子
 
-[API列表](https://github.com/silenceper/wechat/tree/v2/doc/api)
+[API 列表](https://github.com/silenceper/wechat/tree/v2/doc/api)
 
 [Wechat SDK 2.0 文档](https://silenceper.com/wechat)
 
@@ -25,7 +25,7 @@ import "github.com/silenceper/wechat/v2"
 以下是一个微信公众号处理消息接收以及回复的例子：
 
 ```go
-// 使用memcache保存access_token，也可选择redis或自定义cache
+// 使用 memcache 保存 access_token，也可选择 redis 或自定义 cache
 wc := wechat.NewWechat()
 memory := cache.NewMemory()
 cfg := &offConfig.Config{
@@ -37,7 +37,7 @@ cfg := &offConfig.Config{
 }
 officialAccount := wc.GetOfficialAccount(cfg)
 
-// 传入request和responseWriter
+// 传入 request 和 responseWriter
 server := officialAccount.GetServer(req, rw)
 // 设置接收消息的处理方法
 server.SetMessageHandler(func(msg *message.MixMessage) *message.Reply {
@@ -60,20 +60,20 @@ server.Send()
 
 ## 目录说明
 
-- officialaccount: 微信公众号API
-- miniprogram: 小程序API
-- minigame:小游戏API
-- pay:微信支付API
-- openplatform:开放平台API
+- officialaccount: 微信公众号 API
+- miniprogram: 小程序 API
+- minigame:小游戏 API
+- pay:微信支付 API
+- openplatform:开放平台 API
 - work:企业微信
 - aispeech:智能对话
-- doc: api文档
+- doc: api 文档
 
 ## 贡献
 
-- 在[API列表](https://github.com/silenceper/wechat/tree/v2/doc/api)中查看哪些API未实现
-- 提交issue，描述需要贡献的内容
-- 完成更改后，提交PR
+- 在[API 列表](https://github.com/silenceper/wechat/tree/v2/doc/api)中查看哪些 API 未实现
+- 提交 issue，描述需要贡献的内容
+- 完成更改后，提交 PR
 
 ## 公众号
 

@@ -33,7 +33,7 @@ type ResCode2Session struct {
 
 	OpenID     string `json:"openid"`      // 用户唯一标识
 	SessionKey string `json:"session_key"` // 会话密钥
-	UnionID    string `json:"unionid"`     // 用户在开放平台的唯一标识符，在满足UnionID下发条件的情况下会返回
+	UnionID    string `json:"unionid"`     // 用户在开放平台的唯一标识符，在满足 UnionID 下发条件的情况下会返回
 }
 
 // RspCheckEncryptedData .
@@ -70,12 +70,12 @@ func (auth *Auth) GetPaidUnionID() {
 	// TODO
 }
 
-// CheckEncryptedData .检查加密信息是否由微信生成（当前只支持手机号加密数据），只能检测最近3天生成的加密数据
+// CheckEncryptedData .检查加密信息是否由微信生成（当前只支持手机号加密数据），只能检测最近 3 天生成的加密数据
 func (auth *Auth) CheckEncryptedData(encryptedMsgHash string) (result RspCheckEncryptedData, err error) {
 	return auth.CheckEncryptedDataContext(context2.Background(), encryptedMsgHash)
 }
 
-// CheckEncryptedDataContext .检查加密信息是否由微信生成（当前只支持手机号加密数据），只能检测最近3天生成的加密数据
+// CheckEncryptedDataContext .检查加密信息是否由微信生成（当前只支持手机号加密数据），只能检测最近 3 天生成的加密数据
 func (auth *Auth) CheckEncryptedDataContext(ctx context2.Context, encryptedMsgHash string) (result RspCheckEncryptedData, err error) {
 	var response []byte
 	var (
@@ -85,7 +85,7 @@ func (auth *Auth) CheckEncryptedDataContext(ctx context2.Context, encryptedMsgHa
 		return
 	}
 
-	// 由于GetPhoneNumberContext需要传入JSON，所以HTTPPostContext入参改为[]byte
+	// 由于 GetPhoneNumberContext 需要传入 JSON，所以 HTTPPostContext 入参改为 []byte
 	if response, err = util.HTTPPostContext(ctx, fmt.Sprintf(checkEncryptedDataURL, at), []byte("encrypted_msg_hash="+encryptedMsgHash), nil); err != nil {
 		return
 	}
@@ -113,7 +113,7 @@ type PhoneInfo struct {
 	} `json:"watermark"` // 数据水印
 }
 
-// GetPhoneNumberContext 小程序通过code获取用户手机号
+// GetPhoneNumberContext 小程序通过 code 获取用户手机号
 func (auth *Auth) GetPhoneNumberContext(ctx context2.Context, code string) (*GetPhoneNumberResponse, error) {
 	var response []byte
 	var (
@@ -142,7 +142,7 @@ func (auth *Auth) GetPhoneNumberContext(ctx context2.Context, code string) (*Get
 	return &result, err
 }
 
-// GetPhoneNumber 小程序通过code获取用户手机号
+// GetPhoneNumber 小程序通过 code 获取用户手机号
 func (auth *Auth) GetPhoneNumber(code string) (*GetPhoneNumberResponse, error) {
 	return auth.GetPhoneNumberContext(context2.Background(), code)
 }

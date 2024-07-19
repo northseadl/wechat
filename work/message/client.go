@@ -1,4 +1,4 @@
-// Package message 消息推送,实现企业微信消息推送相关接口：https://developer.work.weixin.qq.com/document/path/90235
+// Package message 消息推送，实现企业微信消息推送相关接口：https://developer.work.weixin.qq.com/document/path/90235
 package message
 
 import (

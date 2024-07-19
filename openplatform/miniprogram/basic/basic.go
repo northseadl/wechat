@@ -53,7 +53,7 @@ func (basic *Basic) GetAccountBasicInfo() (*AccountBasicInfo, error) {
 	return result, nil
 }
 
-// modify_domain设置服务器域名
+// modify_domain 设置服务器域名
 // TODO
 // func (encryptor *Basic) modifyDomain() {
 // }
@@ -87,7 +87,7 @@ func (basic *Basic) CheckNickName(nickname string) (*CheckNickNameResp, error) {
 // SetNickNameResp 设置小程序名称结果
 type SetNickNameResp struct {
 	util.CommonError
-	AuditID int64  `json:"audit_id"` // 审核单Id，通过用于查询改名审核状态
+	AuditID int64  `json:"audit_id"` // 审核单 Id，通过用于查询改名审核状态
 	Wording string `json:"wording"`  // 材料说明
 }
 
@@ -221,7 +221,7 @@ func (basic *Basic) SetHeadImage(imgMediaID string) error {
 }
 
 // SetHeadImageFull 修改小程序头像
-// 新增临时素材: https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html
+// 新增临时素材：https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html
 // ref: https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/basic-info-management/setHeadImage.html
 func (basic *Basic) SetHeadImageFull(param *SetHeadImageParam) error {
 	ak, err := basic.GetAuthrAccessToken(basic.AppID)

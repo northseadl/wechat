@@ -26,7 +26,7 @@ func NewMessageManager(context *context.Context) *Manager {
 
 // CustomerMessage  客服消息
 type CustomerMessage struct {
-	ToUser          string                `json:"touser"`                    // 接受者OpenID
+	ToUser          string                `json:"touser"`                    // 接受者 OpenID
 	Msgtype         MsgType               `json:"msgtype"`                   // 客服消息类型
 	Text            *MediaText            `json:"text,omitempty"`            // 可选
 	Image           *MediaResource        `json:"image,omitempty"`           // 可选
@@ -93,12 +93,12 @@ type MediaText struct {
 	Content string `json:"content"`
 }
 
-// MediaResource  消息使用的永久素材id
+// MediaResource  消息使用的永久素材 id
 type MediaResource struct {
 	MediaID string `json:"media_id"`
 }
 
-// MediaArticle  消息使用的已发布文章id
+// MediaArticle  消息使用的已发布文章 id
 type MediaArticle struct {
 	ArticleID string `json:"article_id"`
 }
@@ -146,7 +146,7 @@ type MsgmenuItem struct {
 	Content string `json:"content"`
 }
 
-// MediaWxcard 卡券的id
+// MediaWxcard 卡券的 id
 type MediaWxcard struct {
 	CardID string `json:"card_id"`
 }

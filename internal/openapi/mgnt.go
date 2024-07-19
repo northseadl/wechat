@@ -11,13 +11,13 @@ import (
 )
 
 const (
-	clearQuotaURL            = "https://api.weixin.qq.com/cgi-bin/clear_quota"       // 重置API调用次数
-	getAPIQuotaURL           = "https://api.weixin.qq.com/cgi-bin/openapi/quota/get" // 查询API调用额度
-	getRidInfoURL            = "https://api.weixin.qq.com/cgi-bin/openapi/rid/get"   // 查询rid信息
-	clearQuotaByAppSecretURL = "https://api.weixin.qq.com/cgi-bin/clear_quota/v2"    // 使用AppSecret重置 API 调用次数
+	clearQuotaURL            = "https://api.weixin.qq.com/cgi-bin/clear_quota"       // 重置 API 调用次数
+	getAPIQuotaURL           = "https://api.weixin.qq.com/cgi-bin/openapi/quota/get" // 查询 API 调用额度
+	getRidInfoURL            = "https://api.weixin.qq.com/cgi-bin/openapi/rid/get"   // 查询 rid 信息
+	clearQuotaByAppSecretURL = "https://api.weixin.qq.com/cgi-bin/clear_quota/v2"    // 使用 AppSecret 重置 API 调用次数
 )
 
-// OpenAPI openApi管理
+// OpenAPI openApi 管理
 type OpenAPI struct {
 	ctx interface{}
 }
@@ -27,7 +27,7 @@ func NewOpenAPI(ctx interface{}) *OpenAPI {
 	return &OpenAPI{ctx: ctx}
 }
 
-// ClearQuota 重置API调用次数
+// ClearQuota 重置 API 调用次数
 // https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/openApi-mgnt/clearQuota.html
 func (o *OpenAPI) ClearQuota() error {
 	appID, _, err := o.getAppIDAndSecret()
@@ -48,7 +48,7 @@ func (o *OpenAPI) ClearQuota() error {
 	return util.DecodeWithCommonError(res, "ClearQuota")
 }
 
-// GetAPIQuota 查询API调用额度
+// GetAPIQuota 查询 API 调用额度
 // https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/openApi-mgnt/getApiQuota.html
 func (o *OpenAPI) GetAPIQuota(params openapi.GetAPIQuotaParams) (quota openapi.APIQuota, err error) {
 	res, err := o.doPostRequest(getAPIQuotaURL, params)
@@ -60,7 +60,7 @@ func (o *OpenAPI) GetAPIQuota(params openapi.GetAPIQuotaParams) (quota openapi.A
 	return
 }
 
-// GetRidInfo 查询rid信息
+// GetRidInfo 查询 rid 信息
 // https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/openApi-mgnt/getRidInfo.html
 func (o *OpenAPI) GetRidInfo(params openapi.GetRidInfoParams) (r openapi.RidInfo, err error) {
 	res, err := o.doPostRequest(getRidInfoURL, params)
@@ -72,7 +72,7 @@ func (o *OpenAPI) GetRidInfo(params openapi.GetRidInfoParams) (r openapi.RidInfo
 	return
 }
 
-// ClearQuotaByAppSecret 使用AppSecret重置 API 调用次数
+// ClearQuotaByAppSecret 使用 AppSecret 重置 API 调用次数
 // https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/openApi-mgnt/clearQuotaByAppSecret.html
 func (o *OpenAPI) ClearQuotaByAppSecret() error {
 	id, secret, err := o.getAppIDAndSecret()
@@ -93,10 +93,16 @@ func (o *OpenAPI) ClearQuotaByAppSecret() error {
 func (o *OpenAPI) getAppIDAndSecret() (string, string, error) {
 	switch o.ctx.(type) {
 	case *mpContext.Context:
-		c := o.ctx.(*mpContext.Context)
+		c, ok := o.ctx.(*mpContext.Context)
+		if !ok {
+			return "", "", errors.New("invalid context type")
+		}
 		return c.AppID, c.AppSecret, nil
 	case *ocContext.Context:
-		c := o.ctx.(*ocContext.Context)
+		c, ok := o.ctx.(*ocContext.Context)
+		if !ok {
+			return "", "", errors.New("invalid context type")
+		}
 		return c.AppID, c.AppSecret, nil
 	default:
 		return "", "", errors.New("invalid context type")

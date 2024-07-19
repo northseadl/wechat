@@ -155,7 +155,7 @@
 | 通过网页授权的 code 换取 access_token(区别于 context 中的 access_token) | GET      | /sns/oauth2/access_token                            | YES        | (oauth \*Oauth) GetUserAccessToken   |
 | 刷新 access_token                                                       | GET      | /sns/oauth2/refresh_token?                          | YES        | (oauth \*Oauth) RefreshAccessToken   |
 | 检验 access_token 是否有效                                              | GET      | /sns/auth                                           | YES        | (oauth \*Oauth) CheckAccessToken(    |
-| 拉取用户信息(需 scope 为 snsapi_userinfo)                               | GET      | /sns/userinfo                                       | YES        | (oauth \*Oauth) GetUserInfo          |
+| 拉取用户信息 (需 scope 为 snsapi_userinfo)                               | GET      | /sns/userinfo                                       | YES        | (oauth \*Oauth) GetUserInfo          |
 | 获取 jssdk 需要的配置参数                                               | GET      | /cgi-bin/ticket/getticket                           | YES        | (js \*Js) GetConfig                  |
 
 ## 素材管理

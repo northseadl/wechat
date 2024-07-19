@@ -114,29 +114,29 @@ type UploadShippingInfoRequest struct {
 
 // ShippingOrderKey 订单
 type ShippingOrderKey struct {
-	OrderNumberType NumberType `json:"order_number_type"` // 订单单号类型，用于确认需要上传详情的订单。枚举值1，使用下单商户号和商户侧单号；枚举值2，使用微信支付单号。
+	OrderNumberType NumberType `json:"order_number_type"` // 订单单号类型，用于确认需要上传详情的订单。枚举值 1，使用下单商户号和商户侧单号；枚举值 2，使用微信支付单号。
 	TransactionID   string     `json:"transaction_id"`    // 原支付交易对应的微信订单号
 	Mchid           string     `json:"mchid"`             // 支付下单商户的商户号，由微信支付生成并下发
-	OutTradeNo      string     `json:"out_trade_no"`      // 商户系统内部订单号，只能是数字、大小写字母`_-*`且在同一个商户号下唯一
+	OutTradeNo      string     `json:"out_trade_no"`      // 商户系统内部订单号，只能是数字、大小写字母 `_-*` 且在同一个商户号下唯一
 }
 
 // ShippingPayer 支付者信息
 type ShippingPayer struct {
-	Openid string `json:"openid"` // 用户标识，用户在小程序appid下的唯一标识
+	Openid string `json:"openid"` // 用户标识，用户在小程序 appid 下的唯一标识
 }
 
 // ShippingInfo 物流信息
 type ShippingInfo struct {
 	TrackingNo     string          `json:"tracking_no"`     // 物流单号，物流快递发货时必填
-	ExpressCompany string          `json:"express_company"` // 物流公司编码，快递公司ID，物流快递发货时必填；参见「查询物流公司编码列表」
-	ItemDesc       string          `json:"item_desc"`       // 商品信息，例如：微信红包抱枕*1个，限120个字以内
+	ExpressCompany string          `json:"express_company"` // 物流公司编码，快递公司 ID，物流快递发货时必填；参见「查询物流公司编码列表」
+	ItemDesc       string          `json:"item_desc"`       // 商品信息，例如：微信红包抱枕*1 个，限 120 个字以内
 	Contact        ShippingContact `json:"contact"`         // 联系方式，当发货的物流公司为顺丰时，联系方式为必填，收件人或寄件人联系方式二选一
 }
 
 // ShippingContact 联系方式
 type ShippingContact struct {
-	ConsignorContact string `json:"consignor_contact"` // 寄件人联系方式，寄件人联系方式，采用掩码传输，最后4位数字不能打掩码
-	ReceiverContact  string `json:"receiver_contact"`  // 收件人联系方式，收件人联系方式，采用掩码传输，最后4位数字不能打掩码
+	ConsignorContact string `json:"consignor_contact"` // 寄件人联系方式，寄件人联系方式，采用掩码传输，最后 4 位数字不能打掩码
+	ReceiverContact  string `json:"receiver_contact"`  // 收件人联系方式，收件人联系方式，采用掩码传输，最后 4 位数字不能打掩码
 }
 
 // DeliveryMode 发货模式
@@ -178,13 +178,13 @@ type GetShippingOrderRequest struct {
 	TransactionID   string `json:"transaction_id"`    // 原支付交易对应的微信订单号
 	MerchantID      string `json:"merchant_id"`       // 支付下单商户的商户号，由微信支付生成并下发
 	SubMerchantID   string `json:"sub_merchant_id"`   //二级商户号
-	MerchantTradeNo string `json:"merchant_trade_no"` //商户系统内部订单号，只能是数字、大小写字母`_-*`且在同一个商户号下唯一。
+	MerchantTradeNo string `json:"merchant_trade_no"` //商户系统内部订单号，只能是数字、大小写字母 `_-*` 且在同一个商户号下唯一。
 }
 
 // ShippingItem 物流信息
 type ShippingItem struct {
-	TrackingNo     string `json:"tracking_no"`     // 物流单号，示例值: "323244567777
-	ExpressCompany string `json:"express_company"` // 物流公司编码，快递公司ID，物流快递发货时必填；参见「查询物流公司编码列表」
+	TrackingNo     string `json:"tracking_no"`     // 物流单号，示例值："323244567777
+	ExpressCompany string `json:"express_company"` // 物流公司编码，快递公司 ID，物流快递发货时必填；参见「查询物流公司编码列表」
 	UploadTime     int64  `json:"upload_time"`     // 上传物流信息时间，时间戳形式
 }
 
@@ -201,12 +201,12 @@ type ShippingDetail struct {
 // ShippingOrder 订单发货状态
 type ShippingOrder struct {
 	TransactionID   string          `json:"transaction_id"`    // 原支付交易对应的微信订单号
-	MerchantTradeNo string          `json:"merchant_trade_no"` // 商户系统内部订单号，只能是数字、大小写字母`_-*`且在同一个商户号下唯一
+	MerchantTradeNo string          `json:"merchant_trade_no"` // 商户系统内部订单号，只能是数字、大小写字母 `_-*` 且在同一个商户号下唯一
 	MerchantID      string          `json:"merchant_id"`       // 支付下单商户的商户号，由微信支付生成并下发
 	SubMerchantID   string          `json:"sub_merchant_id"`   // 二级商户号
-	Description     string          `json:"description"`       // 以分号连接的该支付单的所有商品描述，当超过120字时自动截断并以 “...” 结尾
+	Description     string          `json:"description"`       // 以分号连接的该支付单的所有商品描述，当超过 120 字时自动截断并以“...”结尾
 	PaidAmount      int64           `json:"paid_amount"`       // 支付单实际支付金额，整型，单位：分钱
-	Openid          string          `json:"openid"`            // 支付者openid
+	Openid          string          `json:"openid"`            // 支付者 openid
 	TradeCreateTime int64           `json:"trade_create_time"` // 交易创建时间，时间戳形式
 	PayTime         int64           `json:"pay_time"`          // 支付时间，时间戳形式
 	InComplaint     bool            `json:"in_complaint"`      // 是否处在交易纠纷中
@@ -240,9 +240,9 @@ const (
 type GetShippingOrderListRequest struct {
 	PayTimeRange *TimeRange `json:"pay_time_range"`        // 支付时间范围
 	OrderState   State      `json:"order_state,omitempty"` // 订单状态
-	Openid       string     `json:"openid,omitempty"`      // 支付者openid
+	Openid       string     `json:"openid,omitempty"`      // 支付者 openid
 	LastIndex    string     `json:"last_index,omitempty"`  // 	翻页时使用，获取第一页时不用传入，如果查询结果中 has_more 字段为 true，则传入该次查询结果中返回的 last_index 字段可获取下一页
-	PageSize     int64      `json:"page_size"`             // 每页数量，最多50条
+	PageSize     int64      `json:"page_size"`             // 每页数量，最多 50 条
 }
 
 // TimeRange 时间范围
@@ -264,6 +264,6 @@ type NotifyConfirmReceiveRequest struct {
 	TransactionID   string `json:"transaction_id"`    // 原支付交易对应的微信订单号
 	MerchantID      string `json:"merchant_id"`       // 支付下单商户的商户号，由微信支付生成并下发
 	SubMerchantID   string `json:"sub_merchant_id"`   // 二级商户号
-	MerchantTradeNo string `json:"merchant_trade_no"` // 商户系统内部订单号，只能是数字、大小写字母`_-*`且在同一个商户号下唯一
+	MerchantTradeNo string `json:"merchant_trade_no"` // 商户系统内部订单号，只能是数字、大小写字母 `_-*` 且在同一个商户号下唯一
 	ReceivedTime    int64  `json:"received_time"`     // 收货时间，时间戳形式
 }

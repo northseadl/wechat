@@ -9,10 +9,10 @@ import (
 
 // Client 微信客服实例
 type Client struct {
-	corpID         string // 企业ID：企业开通的每个微信客服，都对应唯一的企业ID，企业可在微信客服管理后台的企业信息处查看
-	secret         string // Secret是微信客服用于校验开发者身份的访问密钥，企业成功注册微信客服后，可在「微信客服管理后台-开发配置」处获取
+	corpID         string // 企业 ID：企业开通的每个微信客服，都对应唯一的企业 ID，企业可在微信客服管理后台的企业信息处查看
+	secret         string // Secret 是微信客服用于校验开发者身份的访问密钥，企业成功注册微信客服后，可在「微信客服管理后台 - 开发配置」处获取
 	token          string // 用于生成签名校验回调请求的合法性
-	encodingAESKey string // 回调消息加解密参数是AES密钥的Base64编码，用于解密回调消息内容对应的密文
+	encodingAESKey string // 回调消息加解密参数是 AES 密钥的 Base64 编码，用于解密回调消息内容对应的密文
 	cache          cache.Cache
 	ctx            *context.Context
 }

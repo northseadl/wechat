@@ -19,7 +19,7 @@ const (
 	getOptionURL = "https://qyapi.weixin.qq.com/cgi-bin/checkin/getcheckinoption?access_token=%s"
 	// getScheduleListURL 获取打卡人员排班信息
 	getScheduleListURL = "https://qyapi.weixin.qq.com/cgi-bin/checkin/getcheckinschedulist?access_token=%s"
-	// getHardwareDataURL获取设备打卡数据
+	// getHardwareDataURL 获取设备打卡数据
 	getHardwareDataURL = "https://qyapi.weixin.qq.com/cgi-bin/hardware/get_hardware_checkin_data?access_token=%s"
 )
 
@@ -138,17 +138,17 @@ type (
 		SpDescription SpDescription `json:"sp_description"`
 	}
 
-	// SpTitle 假勤信息摘要-标题信息
+	// SpTitle 假勤信息摘要 - 标题信息
 	SpTitle struct {
 		Data []SpData `json:"data"`
 	}
 
-	// SpDescription 假勤信息摘要-描述信息
+	// SpDescription 假勤信息摘要 - 描述信息
 	SpDescription struct {
 		Data []SpData `json:"data"`
 	}
 
-	// SpData 假勤信息(多种语言描述，目前只有中文一种)
+	// SpData 假勤信息 (多种语言描述，目前只有中文一种)
 	SpData struct {
 		Lang string `json:"lang"`
 		Text string `json:"text"`
@@ -324,26 +324,26 @@ type GroupCheckinTime struct {
 	RemindOffWorkSec int64 `json:"remind_off_work_sec"`
 }
 
-// SpeWorkdays 特殊日期-必须打卡日期信息
+// SpeWorkdays 特殊日期 - 必须打卡日期信息
 type SpeWorkdays struct {
 	Timestamp   int64              `json:"timestamp"`
 	Notes       string             `json:"notes"`
 	CheckinTime []GroupCheckinTime `json:"checkintime"`
 }
 
-// SpeOffDays 特殊日期-不用打卡日期信息
+// SpeOffDays 特殊日期 - 不用打卡日期信息
 type SpeOffDays struct {
 	Timestamp int64  `json:"timestamp"`
 	Notes     string `json:"notes"`
 }
 
-// WifiMacInfos 打卡地点-WiFi打卡信息
+// WifiMacInfos 打卡地点-WiFi 打卡信息
 type WifiMacInfos struct {
 	WifiName string `json:"wifiname"`
 	WifiMac  string `json:"wifimac"`
 }
 
-// LocInfos 打卡地点-位置打卡信息
+// LocInfos 打卡地点 - 位置打卡信息
 type LocInfos struct {
 	Lat       int64  `json:"lat"`
 	Lng       int64  `json:"lng"`
@@ -365,7 +365,7 @@ type ReporterInfo struct {
 	UpdateTime int64       `json:"updatetime"`
 }
 
-// Reporters 汇报对象，每个汇报人用userid表示
+// Reporters 汇报对象，每个汇报人用 userid 表示
 type Reporters struct {
 	UserID string `json:"userid"`
 }
@@ -378,7 +378,7 @@ type GroupOtInfo struct {
 	OtCheckInfo          OtCheckInfo `json:"otcheckinfo"`
 }
 
-// OtCheckInfo 以打卡时间为准-加班时长计算规则信息
+// OtCheckInfo 以打卡时间为准 - 加班时长计算规则信息
 type OtCheckInfo struct {
 	OtWorkingDayTimeStart      int64      `json:"ot_workingday_time_start"`
 	OtWorkingDayTimeMin        int64      `json:"ot_workingday_time_min"`
@@ -390,25 +390,25 @@ type OtCheckInfo struct {
 	OtNonWorkingDayRestInfo    OtRestInfo `json:"ot_nonworkingday_restinfo"`
 }
 
-// OtRestInfo 加班-休息扣除配置信息
+// OtRestInfo 加班 - 休息扣除配置信息
 type OtRestInfo struct {
 	Type          int64         `json:"type"`
 	FixTimeRule   FixTimeRule   `json:"fix_time_rule"`
 	CalOtTimeRule CalOtTimeRule `json:"cal_ottime_rule"`
 }
 
-// FixTimeRule 工作日加班-指定休息时间配置信息
+// FixTimeRule 工作日加班 - 指定休息时间配置信息
 type FixTimeRule struct {
 	FixTimeBeginSec int64 `json:"fix_time_begin_sec"`
 	FixTimeEndSec   int64 `json:"fix_time_end_sec"`
 }
 
-// CalOtTimeRule 工作日加班-按加班时长扣除配置信息
+// CalOtTimeRule 工作日加班 - 按加班时长扣除配置信息
 type CalOtTimeRule struct {
 	Items []CalOtTimeRuleItem `json:"items"`
 }
 
-// CalOtTimeRuleItem 工作日加班-按加班时长扣除条件信息
+// CalOtTimeRuleItem 工作日加班 - 按加班时长扣除条件信息
 type CalOtTimeRuleItem struct {
 	OtTime   int64 `json:"ot_time"`
 	RestTime int64 `json:"rest_time"`

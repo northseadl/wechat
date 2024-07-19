@@ -51,7 +51,7 @@ type ULResult struct {
 	URLLink string `json:"url_link"`
 }
 
-// Generate 生成url link
+// Generate 生成 url link
 func (u *URLLink) Generate(params *ULParams) (string, error) {
 	accessToken, err := u.GetAccessToken()
 	if err != nil {

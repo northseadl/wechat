@@ -18,8 +18,8 @@ const (
 
 // ReceptionistOptions 添加接待人员请求参数
 type ReceptionistOptions struct {
-	OpenKFID   string   `json:"open_kfid"`   // 客服帐号ID
-	UserIDList []string `json:"userid_list"` // 接待人员userid列表。第三方应用填密文userid，即open_userid 可填充个数：1 ~ 100。超过100个需分批调用。
+	OpenKFID   string   `json:"open_kfid"`   // 客服帐号 ID
+	UserIDList []string `json:"userid_list"` // 接待人员 userid 列表。第三方应用填密文 userid，即 open_userid 可填充个数：1 ~ 100。超过 100 个需分批调用。
 }
 
 // ReceptionistSchema 添加接待人员响应内容
@@ -79,8 +79,8 @@ func (r *Client) ReceptionistDel(options ReceptionistOptions) (info Receptionist
 type ReceptionistListSchema struct {
 	util.CommonError
 	ReceptionistList []struct {
-		UserID string `json:"userid"` // 接待人员的userid。第三方应用获取到的为密文userid，即open_userid
-		Status int    `json:"status"` // 接待人员的接待状态。0:接待中,1:停止接待。第三方应用需具有“管理帐号、分配会话和收发消息”权限才可获取
+		UserID string `json:"userid"` // 接待人员的 userid。第三方应用获取到的为密文 userid，即 open_userid
+		Status int    `json:"status"` // 接待人员的接待状态。0:接待中，1:停止接待。第三方应用需具有“管理帐号、分配会话和收发消息”权限才可获取
 	} `json:"servicer_list"`
 }
 

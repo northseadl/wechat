@@ -33,7 +33,7 @@ type Params struct {
 	Amount         int
 	Desc           string
 	SpbillCreateIP string
-	RootCa         string // ca证书
+	RootCa         string // ca 证书
 }
 
 // request 接口请求参数

@@ -35,7 +35,10 @@ func TestRedis(t *testing.T) {
 		t.Error("IsExist Error")
 	}
 
-	name := redis.Get(key).(string)
+	name, ok := redis.Get(key).(string)
+	if !ok {
+		t.Error("get Error")
+	}
 	if name != val {
 		t.Error("get Error")
 	}

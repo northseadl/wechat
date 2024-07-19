@@ -136,7 +136,7 @@ type OrderItem struct {
 	PaidFee        int         `json:"paid_fee"`         // 用户支付金额，单位：分
 	OrderType      int         `json:"order_type"`       // 订单类型 0-支付单 1-退款单
 	RefundFee      int         `json:"refund_fee"`       // 当类型为退款单时表示退款金额，单位分
-	PaidTime       int64       `json:"paid_time"`        // 支付/退款时间，unix秒级时间戳
+	PaidTime       int64       `json:"paid_time"`        // 支付/退款时间，unix 秒级时间戳
 	ProvideTime    int64       `json:"provide_time"`     // 发货时间，unix 秒级时间戳
 	BizMeta        string      `json:"biz_meta"`         // 业务自定义数据 订单创建时传的信息
 	EnvType        int         `json:"env_type"`         // 环境类型 1-现网 2-沙箱

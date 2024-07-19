@@ -11,7 +11,7 @@ import (
 	"github.com/silenceper/wechat/v2/openplatform/officialaccount"
 )
 
-// OpenPlatform 微信开放平台相关api
+// OpenPlatform 微信开放平台相关 api
 type OpenPlatform struct {
 	*context.Context
 }

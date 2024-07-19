@@ -11,13 +11,13 @@ import (
 type MediaType string
 
 const (
-	// MediaTypeImage 媒体文件:图片
+	// MediaTypeImage 媒体文件：图片
 	MediaTypeImage MediaType = "image"
-	// MediaTypeVoice 媒体文件:声音
+	// MediaTypeVoice 媒体文件：声音
 	MediaTypeVoice MediaType = "voice"
-	// MediaTypeVideo 媒体文件:视频
+	// MediaTypeVideo 媒体文件：视频
 	MediaTypeVideo MediaType = "video"
-	// MediaTypeThumb 媒体文件:缩略图
+	// MediaTypeThumb 媒体文件：缩略图
 	MediaTypeThumb MediaType = "thumb"
 )
 
@@ -63,7 +63,7 @@ func (material *Material) MediaUpload(mediaType MediaType, filename string) (med
 }
 
 // GetMediaURL 返回临时素材的下载地址供用户自己处理
-// NOTICE: URL 不可公开，因为含access_token 需要立即另存文件
+// NOTICE: URL 不可公开，因为含 access_token 需要立即另存文件
 func (material *Material) GetMediaURL(mediaID string) (mediaURL string, err error) {
 	var accessToken string
 	accessToken, err = material.GetAccessToken()

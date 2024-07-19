@@ -33,12 +33,12 @@ type Article struct {
 	Title              string `json:"title"`                 // 标题
 	Author             string `json:"author"`                // 作者
 	Digest             string `json:"digest"`                // 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空。
-	Content            string `json:"content"`               // 图文消息的具体内容，支持HTML标签，必须少于2万字符，小于1M，且去除JS
-	ContentSourceURL   string `json:"content_source_url"`    // 图文消息的原文地址，即点击“阅读原文”后的URL
-	ThumbMediaID       string `json:"thumb_media_id"`        // 图文消息的封面图片素材id（必须是永久MediaID）
-	ShowCoverPic       uint   `json:"show_cover_pic"`        // 是否显示封面，0为false，即不显示，1为true，即显示(默认)
-	NeedOpenComment    uint   `json:"need_open_comment"`     // 是否打开评论，0不打开(默认)，1打开
-	OnlyFansCanComment uint   `json:"only_fans_can_comment"` // 是否粉丝才可评论，0所有人可评论(默认)，1粉丝才可评论
+	Content            string `json:"content"`               // 图文消息的具体内容，支持 HTML 标签，必须少于 2 万字符，小于 1M，且去除 JS
+	ContentSourceURL   string `json:"content_source_url"`    // 图文消息的原文地址，即点击“阅读原文”后的 URL
+	ThumbMediaID       string `json:"thumb_media_id"`        // 图文消息的封面图片素材 id（必须是永久 MediaID）
+	ShowCoverPic       uint   `json:"show_cover_pic"`        // 是否显示封面，0 为 false，即不显示，1 为 true，即显示 (默认)
+	NeedOpenComment    uint   `json:"need_open_comment"`     // 是否打开评论，0 不打开 (默认)，1 打开
+	OnlyFansCanComment uint   `json:"only_fans_can_comment"` // 是否粉丝才可评论，0 所有人可评论 (默认)，1 粉丝才可评论
 }
 
 // AddDraft 新建草稿
@@ -117,7 +117,7 @@ func (draft *Draft) DeleteDraft(mediaID string) (err error) {
 }
 
 // UpdateDraft 修改草稿
-// index 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义），第一篇为0
+// index 要更新的文章在图文消息中的位置（多图文消息时，此字段才有意义），第一篇为 0
 func (draft *Draft) UpdateDraft(article *Article, mediaID string, index uint) (err error) {
 	accessToken, err := draft.GetAccessToken()
 	if err != nil {
@@ -176,7 +176,7 @@ type ArticleList struct {
 
 // ArticleListItem 用于 ArticleList 的 item 节点
 type ArticleListItem struct {
-	MediaID    string             `json:"media_id"`    // 图文消息的id
+	MediaID    string             `json:"media_id"`    // 图文消息的 id
 	Content    ArticleListContent `json:"content"`     // 内容
 	UpdateTime int64              `json:"update_time"` // 这篇图文消息素材的最后更新时间
 }

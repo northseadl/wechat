@@ -64,7 +64,7 @@ type USResult struct {
 	OpenLink string `json:"openlink"`
 }
 
-// Generate 生成url link
+// Generate 生成 url link
 func (u *URLScheme) Generate(params *USParams) (string, error) {
 	accessToken, err := u.GetAccessToken()
 	if err != nil {

@@ -84,7 +84,7 @@ func (wc *Wechat) GetWork(cfg *workConfig.Config) *work.Work {
 	return work.NewWork(cfg)
 }
 
-// SetHTTPClient  设置HTTPClient
+// SetHTTPClient  设置 HTTPClient
 func (wc *Wechat) SetHTTPClient(client *http.Client) {
 	util.DefaultHTTPClient = client
 }

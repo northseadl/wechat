@@ -153,7 +153,7 @@ func NewOCR(c *context.Context) *OCR {
 	return ocr
 }
 
-// IDCard 身份证OCR识别接口
+// IDCard 身份证 OCR 识别接口
 func (ocr *OCR) IDCard(path string) (resIDCard ResIDCard, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {
@@ -170,7 +170,7 @@ func (ocr *OCR) IDCard(path string) (resIDCard ResIDCard, err error) {
 	return
 }
 
-// BankCard 银行卡OCR识别接口
+// BankCard 银行卡 OCR 识别接口
 func (ocr *OCR) BankCard(path string) (resBankCard ResBankCard, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {
@@ -187,7 +187,7 @@ func (ocr *OCR) BankCard(path string) (resBankCard ResBankCard, err error) {
 	return
 }
 
-// Driving 行驶证OCR识别接口
+// Driving 行驶证 OCR 识别接口
 func (ocr *OCR) Driving(path string) (resDriving ResDriving, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {
@@ -204,7 +204,7 @@ func (ocr *OCR) Driving(path string) (resDriving ResDriving, err error) {
 	return
 }
 
-// DrivingLicense 驾驶证OCR识别接口
+// DrivingLicense 驾驶证 OCR 识别接口
 func (ocr *OCR) DrivingLicense(path string) (resDrivingLicense ResDrivingLicense, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {
@@ -221,7 +221,7 @@ func (ocr *OCR) DrivingLicense(path string) (resDrivingLicense ResDrivingLicense
 	return
 }
 
-// BizLicense 营业执照OCR识别接口
+// BizLicense 营业执照 OCR 识别接口
 func (ocr *OCR) BizLicense(path string) (resBizLicense ResBizLicense, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {
@@ -238,7 +238,7 @@ func (ocr *OCR) BizLicense(path string) (resBizLicense ResBizLicense, err error)
 	return
 }
 
-// Common 通用印刷体OCR识别接口
+// Common 通用印刷体 OCR 识别接口
 func (ocr *OCR) Common(path string) (resCommon ResCommon, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {
@@ -255,7 +255,7 @@ func (ocr *OCR) Common(path string) (resCommon ResCommon, err error) {
 	return
 }
 
-// PlateNumber 车牌OCR识别接口
+// PlateNumber 车牌 OCR 识别接口
 func (ocr *OCR) PlateNumber(path string) (resPlateNumber ResPlateNumber, err error) {
 	accessToken, err := ocr.GetAccessToken()
 	if err != nil {

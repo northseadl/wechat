@@ -441,7 +441,7 @@ type ListMomentStrategyResponse struct {
 	NextCursor string             `json:"next_cursor"`
 }
 
-// MomentStrategyID 规则组ID
+// MomentStrategyID 规则组 ID
 type MomentStrategyID struct {
 	StrategyID int `json:"strategy_id"`
 }

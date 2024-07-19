@@ -102,7 +102,7 @@ type BatchGetUserInfoParams struct {
 // BatchGetUserListItem 需要获取基本信息的用户
 type BatchGetUserListItem struct {
 	OpenID string `json:"openid"` // 用户的标识，对当前公众号唯一
-	Lang   string `json:"lang"`   // 国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为zh-CN
+	Lang   string `json:"lang"`   // 国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为 zh-CN
 }
 
 // InfoList 用户基本信息列表
@@ -161,7 +161,10 @@ func (user *User) ListUserOpenIDs(nextOpenid ...string) (*OpenidList, error) {
 		return nil, err
 	}
 
-	uri, _ := url.Parse(userListURL)
+	uri, err := url.Parse(userListURL)
+	if err != nil {
+		return nil, err
+	}
 	q := uri.Query()
 	q.Set("access_token", accessToken)
 	if len(nextOpenid) > 0 && nextOpenid[0] != "" {
@@ -184,7 +187,7 @@ func (user *User) ListUserOpenIDs(nextOpenid ...string) (*OpenidList, error) {
 	return &userlist, nil
 }
 
-// ListAllUserOpenIDs 返回所有用户OpenID列表
+// ListAllUserOpenIDs 返回所有用户 OpenID 列表
 func (user *User) ListAllUserOpenIDs() ([]string, error) {
 	nextOpenid := ""
 	openids := make([]string, 0)

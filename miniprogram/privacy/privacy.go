@@ -53,9 +53,9 @@ const (
 	getPrivacySettingURL    = "https://api.weixin.qq.com/cgi-bin/component/getprivacysetting"
 	uploadPrivacyExtFileURL = "https://api.weixin.qq.com/cgi-bin/component/uploadprivacyextfile"
 
-	// PrivacyV1 用户隐私保护指引的版本，1表示现网版本。
+	// PrivacyV1 用户隐私保护指引的版本，1 表示现网版本。
 	PrivacyV1 = 1
-	// PrivacyV2 2表示开发版。默认是2开发版。
+	// PrivacyV2 2 表示开发版。默认是 2 开发版。
 	PrivacyV2 = 2
 )
 
@@ -77,12 +77,12 @@ type SettingResponseItem struct {
 	PrivacyLabel string `json:"privacy_label"`
 }
 
-// DescList 权限列表(保持与官方一致)
+// DescList 权限列表 (保持与官方一致)
 type DescList struct {
 	PrivacyDescList []Desc `json:"privacy_desc_list"`
 }
 
-// Desc 权限列表明细(保持与官方一致)
+// Desc 权限列表明细 (保持与官方一致)
 type Desc struct {
 	PrivacyDesc string `json:"privacy_desc"`
 	PrivacyKey  string `json:"privacy_key"`
@@ -110,7 +110,7 @@ func (s *Privacy) GetPrivacySetting(privacyVer int) (GetPrivacySettingResponse, 
 // SetPrivacySetting 更新小程序权限配置
 func (s *Privacy) SetPrivacySetting(privacyVer int, ownerSetting OwnerSetting, settingList []SettingItem) error {
 	if privacyVer == PrivacyV1 && len(settingList) > 0 {
-		return errors.New("当privacy_ver传2或者不传时，setting_list是必填；当privacy_ver传1时，该参数不可传")
+		return errors.New("当 privacy_ver 传 2 或者不传时，setting_list 是必填；当 privacy_ver 传 1 时，该参数不可传")
 	}
 	accessToken, err := s.GetAccessToken()
 	if err != nil {

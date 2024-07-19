@@ -1,4 +1,4 @@
-# 小程序-云开发 SDK
+# 小程序 - 云开发 SDK
 
 Tencent Cloud Base [文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/)
 

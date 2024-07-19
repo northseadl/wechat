@@ -19,7 +19,7 @@ cfg := &openplatform.Config{
 
 
 openPlatform := wc.GetOpenPlatform(cfg)
-// 传入request和responseWriter
+// 传入 request 和 responseWriter
 server := openPlatform.GetServer(req, rw)
 //设置接收消息的处理方法
 server.SetMessageHandler(func(msg *message.MixMessage) *message.Reply {
@@ -57,7 +57,7 @@ server.Send()
 
 ```go
 
-//授权的第三方公众号的appID
+//授权的第三方公众号的 appID
 appID := "xxx"
 openPlatform := wc.GetOpenPlatform(cfg)
 openPlatform.GetOfficialAccount(appID)

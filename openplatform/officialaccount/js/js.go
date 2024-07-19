@@ -24,12 +24,12 @@ func NewJs(context *context.Context, appID string) *Js {
 	return js
 }
 
-// SetJsTicketHandle 自定义js ticket取值方式
+// SetJsTicketHandle 自定义 js ticket 取值方式
 func (js *Js) SetJsTicketHandle(ticketHandle credential.JsTicketHandle) {
 	js.JsTicketHandle = ticketHandle
 }
 
-// GetConfig 第三方平台 - 获取jssdk需要的配置参数
+// GetConfig 第三方平台 - 获取 jssdk 需要的配置参数
 // uri 为当前网页地址
 func (js *Js) GetConfig(uri, appid string) (config *officialJs.Config, err error) {
 	config = new(officialJs.Config)

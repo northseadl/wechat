@@ -14,7 +14,7 @@ type Js struct {
 	credential.JsTicketHandle
 }
 
-// Config 返回给用户jssdk配置信息
+// Config 返回给用户 jssdk 配置信息
 type Config struct {
 	AppID     string `json:"app_id"`
 	Timestamp int64  `json:"timestamp"`
@@ -31,12 +31,12 @@ func NewJs(context *context.Context) *Js {
 	return js
 }
 
-// SetJsTicketHandle 自定义js ticket取值方式
+// SetJsTicketHandle 自定义 js ticket 取值方式
 func (js *Js) SetJsTicketHandle(ticketHandle credential.JsTicketHandle) {
 	js.JsTicketHandle = ticketHandle
 }
 
-// GetConfig 获取jssdk需要的配置参数
+// GetConfig 获取 jssdk 需要的配置参数
 // uri 为当前网页地址
 func (js *Js) GetConfig(uri string) (config *Config, err error) {
 	config = new(Config)

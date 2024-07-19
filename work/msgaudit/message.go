@@ -2,12 +2,12 @@ package msgaudit
 
 // BaseMessage 基础消息
 type BaseMessage struct {
-	MsgID   string   `json:"msgid,omitempty"`   // 消息id，消息的唯一标识，企业可以使用此字段进行消息去重。
-	Action  string   `json:"action,omitempty"`  // 消息动作，目前有send(发送消息)/recall(撤回消息)/switch(切换企业日志)三种类型。
-	From    string   `json:"from,omitempty"`    // 消息发送方id。同一企业内容为userid，非相同企业为external_userid。消息如果是机器人发出，也为external_userid。
-	ToList  []string `json:"tolist,omitempty"`  // 消息接收方列表，可能是多个，同一个企业内容为userid，非相同企业为external_userid。
-	RoomID  string   `json:"roomid,omitempty"`  // 群聊消息的群id。如果是单聊则为空。
-	MsgTime int64    `json:"msgtime,omitempty"` // 消息发送时间戳，utc时间，ms单位。
+	MsgID   string   `json:"msgid,omitempty"`   // 消息 id，消息的唯一标识，企业可以使用此字段进行消息去重。
+	Action  string   `json:"action,omitempty"`  // 消息动作，目前有 send(发送消息)/recall(撤回消息)/switch(切换企业日志) 三种类型。
+	From    string   `json:"from,omitempty"`    // 消息发送方 id。同一企业内容为 userid，非相同企业为 external_userid。消息如果是机器人发出，也为 external_userid。
+	ToList  []string `json:"tolist,omitempty"`  // 消息接收方列表，可能是多个，同一个企业内容为 userid，非相同企业为 external_userid。
+	RoomID  string   `json:"roomid,omitempty"`  // 群聊消息的群 id。如果是单聊则为空。
+	MsgTime int64    `json:"msgtime,omitempty"` // 消息发送时间戳，utc 时间，ms 单位。
 	MsgType string   `json:"msgtype,omitempty"` // 文本消息为：text。
 }
 
@@ -23,8 +23,8 @@ type TextMessage struct {
 type ImageMessage struct {
 	BaseMessage
 	Image struct {
-		SdkFileID string `json:"sdkfileid,omitempty"` // 媒体资源的id信息。
-		Md5Sum    string `json:"md5sum,omitempty"`    // 图片资源的md5值，供进行校验。
+		SdkFileID string `json:"sdkfileid,omitempty"` // 媒体资源的 id 信息。
+		Md5Sum    string `json:"md5sum,omitempty"`    // 图片资源的 md5 值，供进行校验。
 		FileSize  uint32 `json:"filesize,omitempty"`  // 图片资源的文件大小。
 	} `json:"image,omitempty"`
 }
@@ -33,7 +33,7 @@ type ImageMessage struct {
 type RevokeMessage struct {
 	BaseMessage
 	Revoke struct {
-		PreMsgID string `json:"pre_msgid,omitempty"` // 标识撤回的原消息的msgid
+		PreMsgID string `json:"pre_msgid,omitempty"` // 标识撤回的原消息的 msgid
 	} `json:"revoke,omitempty"`
 }
 
@@ -41,8 +41,8 @@ type RevokeMessage struct {
 type AgreeMessage struct {
 	BaseMessage
 	Agree struct {
-		UserID    string `json:"userid,omitempty"`     // 同意/不同意协议者的userid，外部企业默认为external_userid。
-		AgreeTime int64  `json:"agree_time,omitempty"` // 同意/不同意协议的时间，utc时间，ms单位。
+		UserID    string `json:"userid,omitempty"`     // 同意/不同意协议者的 userid，外部企业默认为 external_userid。
+		AgreeTime int64  `json:"agree_time,omitempty"` // 同意/不同意协议的时间，utc 时间，ms 单位。
 	} `json:"agree,omitempty"`
 }
 
@@ -50,10 +50,10 @@ type AgreeMessage struct {
 type VoiceMessage struct {
 	BaseMessage
 	Voice struct {
-		SdkFileID  string `json:"sdkfileid,omitempty"`   // 媒体资源的id信息。
+		SdkFileID  string `json:"sdkfileid,omitempty"`   // 媒体资源的 id 信息。
 		VoiceSize  uint32 `json:"voice_size,omitempty"`  // 语音消息大小。
 		PlayLength uint32 `json:"play_length,omitempty"` // 播放长度。
-		Md5Sum     string `json:"md5sum,omitempty"`      // 图片资源的md5值，供进行校验。
+		Md5Sum     string `json:"md5sum,omitempty"`      // 图片资源的 md5 值，供进行校验。
 	} `json:"voice,omitempty"`
 }
 
@@ -61,10 +61,10 @@ type VoiceMessage struct {
 type VideoMessage struct {
 	BaseMessage
 	Video struct {
-		SdkFileID  string `json:"sdkfileid,omitempty"`   // 媒体资源的id信息。
+		SdkFileID  string `json:"sdkfileid,omitempty"`   // 媒体资源的 id 信息。
 		FileSize   uint32 `json:"filesize,omitempty"`    // 图片资源的文件大小。
 		PlayLength uint32 `json:"play_length,omitempty"` // 播放长度。
-		Md5Sum     string `json:"md5sum,omitempty"`      // 图片资源的md5值，供进行校验。
+		Md5Sum     string `json:"md5sum,omitempty"`      // 图片资源的 md5 值，供进行校验。
 	} `json:"video,omitempty"`
 }
 
@@ -73,7 +73,7 @@ type CardMessage struct {
 	BaseMessage
 	Card struct {
 		CorpName string `json:"corpname,omitempty"` // 名片所有者所在的公司名称。
-		UserID   string `json:"userid,omitempty"`   // 名片所有者的id，同一公司是userid，不同公司是external_userid
+		UserID   string `json:"userid,omitempty"`   // 名片所有者的 id，同一公司是 userid，不同公司是 external_userid
 	} `json:"card,omitempty"`
 }
 
@@ -81,10 +81,10 @@ type CardMessage struct {
 type LocationMessage struct {
 	BaseMessage
 	Location struct {
-		Lng     float64 `json:"longitude,omitempty"` // 经度，单位double
-		Lat     float64 `json:"latitude,omitempty"`  // 纬度，单位double
+		Lng     float64 `json:"longitude,omitempty"` // 经度，单位 double
+		Lat     float64 `json:"latitude,omitempty"`  // 纬度，单位 double
 		Address string  `json:"address,omitempty"`   // 地址信息
-		Title   string  `json:"title,omitempty"`     // 位置信息的title。
+		Title   string  `json:"title,omitempty"`     // 位置信息的 title。
 		Zoom    uint32  `json:"zoom,omitempty"`      // 缩放比例。
 	} `json:"location,omitempty"`
 }
@@ -93,12 +93,12 @@ type LocationMessage struct {
 type EmotionMessage struct {
 	BaseMessage
 	Emotion struct {
-		Type      uint32 `json:"type,omitempty"`      // 表情类型，png或者gif.1表示gif 2表示png。
+		Type      uint32 `json:"type,omitempty"`      // 表情类型，png 或者 gif.1 表示 gif 2 表示 png。
 		Width     uint32 `json:"width,omitempty"`     // 表情图片宽度。
 		Height    uint32 `json:"height,omitempty"`    // 表情图片高度。
 		ImageSize uint32 `json:"imagesize,omitempty"` // 资源的文件大小。
-		SdkFileID string `json:"sdkfileid,omitempty"` // 媒体资源的id信息。
-		Md5Sum    string `json:"md5sum,omitempty"`    // 图片资源的md5值，供进行校验。
+		SdkFileID string `json:"sdkfileid,omitempty"` // 媒体资源的 id 信息。
+		Md5Sum    string `json:"md5sum,omitempty"`    // 图片资源的 md5 值，供进行校验。
 	} `json:"emotion,omitempty"`
 }
 
@@ -108,9 +108,9 @@ type FileMessage struct {
 	File struct {
 		FileName  string `json:"filename,omitempty"`  // 文件名称。
 		FileExt   string `json:"fileext,omitempty"`   // 文件类型后缀。
-		SdkFileID string `json:"sdkfileid,omitempty"` // 媒体资源的id信息。
+		SdkFileID string `json:"sdkfileid,omitempty"` // 媒体资源的 id 信息。
 		FileSize  uint32 `json:"filesize,omitempty"`  // 文件大小。
-		Md5Sum    string `json:"md5sum,omitempty"`    // 资源的md5值，供进行校验。
+		Md5Sum    string `json:"md5sum,omitempty"`    // 资源的 md5 值，供进行校验。
 	} `json:"file,omitempty"`
 }
 
@@ -120,8 +120,8 @@ type LinkMessage struct {
 	Link struct {
 		Title    string `json:"title,omitempty"`       // 消息标题。
 		Desc     string `json:"description,omitempty"` // 消息描述。
-		LinkURL  string `json:"link_url,omitempty"`    // 链接url地址
-		ImageURL string `json:"image_url,omitempty"`   // 链接图片url。
+		LinkURL  string `json:"link_url,omitempty"`    // 链接 url 地址
+		ImageURL string `json:"image_url,omitempty"`   // 链接图片 url。
 	} `json:"link,omitempty"`
 }
 
@@ -159,8 +159,8 @@ type VoteMessage struct {
 	BaseMessage
 	VoteTitle string   `json:"votetitle,omitempty"` // 投票主题。
 	VoteItem  []string `json:"voteitem,omitempty"`  // 投票选项，可能多个内容。
-	VoteType  uint32   `json:"votetype,omitempty"`  // 投票类型.101发起投票、102参与投票。
-	VoteID    string   `json:"voteid,omitempty"`    // 投票id，方便将参与投票消息与发起投票消息进行前后对照。
+	VoteType  uint32   `json:"votetype,omitempty"`  // 投票类型.101 发起投票、102 参与投票。
+	VoteID    string   `json:"voteid,omitempty"`    // 投票 id，方便将参与投票消息与发起投票消息进行前后对照。
 }
 
 // CollectMessage 填表消息
@@ -190,12 +190,12 @@ type MeetingMessage struct {
 	BaseMessage
 	Meeting struct {
 		Topic       string `json:"topic,omitempty"`       // 会议主题
-		StartTime   int64  `json:"starttime,omitempty"`   // 会议开始时间。Utc时间
-		EndTime     int64  `json:"endtime,omitempty"`     // 会议结束时间。Utc时间
+		StartTime   int64  `json:"starttime,omitempty"`   // 会议开始时间。Utc 时间
+		EndTime     int64  `json:"endtime,omitempty"`     // 会议结束时间。Utc 时间
 		Address     string `json:"address,omitempty"`     // 会议地址
 		Remarks     string `json:"remarks,omitempty"`     // 会议备注
-		MeetingType uint32 `json:"meetingtype,omitempty"` // 会议消息类型。101发起会议邀请消息、102处理会议邀请消息
-		MeetingID   uint64 `json:"meetingid,omitempty"`   // 会议id。方便将发起、处理消息进行对照
+		MeetingType uint32 `json:"meetingtype,omitempty"` // 会议消息类型。101 发起会议邀请消息、102 处理会议邀请消息
+		MeetingID   uint64 `json:"meetingid,omitempty"`   // 会议 id。方便将发起、处理消息进行对照
 		Status      uint32 `json:"status,omitempty"`      // 会议邀请处理状态。1 参加会议、2 拒绝会议、3 待定、4 未被邀请、5 会议已取消、6 会议已过期、7 不在房间内。
 	} `json:"meeting,omitempty"`
 }
@@ -206,15 +206,15 @@ type DocMessage struct {
 	Doc struct {
 		Title      string `json:"title,omitempty"`       // 在线文档名称
 		LinkURL    string `json:"link_url,omitempty"`    // 在线文档链接
-		DocCreator string `json:"doc_creator,omitempty"` // 在线文档创建者。本企业成员创建为userid；外部企业成员创建为external_userid
+		DocCreator string `json:"doc_creator,omitempty"` // 在线文档创建者。本企业成员创建为 userid；外部企业成员创建为 external_userid
 	} `json:"doc,omitempty"`
 }
 
-// MarkdownMessage MarkDown消息
+// MarkdownMessage MarkDown 消息
 type MarkdownMessage struct {
 	BaseMessage
 	Info struct {
-		Content string `json:"content,omitempty"` // markdown消息内容，目前为机器人发出的消息
+		Content string `json:"content,omitempty"` // markdown 消息内容，目前为机器人发出的消息
 	} `json:"info,omitempty"`
 }
 
@@ -232,9 +232,9 @@ type CalendarMessage struct {
 	Calendar struct {
 		Title        string   `json:"title,omitempty"`        // 日程主题
 		CreatorName  string   `json:"creatorname,omitempty"`  // 日程组织者
-		AttendeeName []string `json:"attendeename,omitempty"` // 日程参与人。数组，内容为String类型
-		StartTime    int64    `json:"starttime,omitempty"`    // 日程开始时间。Utc时间，单位秒
-		EndTime      int64    `json:"endtime,omitempty"`      // 日程结束时间。Utc时间，单位秒
+		AttendeeName []string `json:"attendeename,omitempty"` // 日程参与人。数组，内容为 String 类型
+		StartTime    int64    `json:"starttime,omitempty"`    // 日程开始时间。Utc 时间，单位秒
+		EndTime      int64    `json:"endtime,omitempty"`      // 日程结束时间。Utc 时间，单位秒
 		Place        string   `json:"place,omitempty"`        // 日程地点
 		Remarks      string   `json:"remarks,omitempty"`      // 日程备注
 	} `json:"calendar,omitempty"`
@@ -245,31 +245,31 @@ type MixedMessage struct {
 	BaseMessage
 	Mixed struct {
 		Item []MixedMsg `json:"item,omitempty"`
-	} `json:"mixed,omitempty"` // 消息内容。可包含图片、文字、表情等多种消息。Object类型
+	} `json:"mixed,omitempty"` // 消息内容。可包含图片、文字、表情等多种消息。Object 类型
 }
 
 // MeetingVoiceCallMessage 音频存档消息
 type MeetingVoiceCallMessage struct {
 	BaseMessage
-	VoiceID          string            `json:"voiceid,omitempty"`            // 音频id
-	MeetingVoiceCall *MeetingVoiceCall `json:"meeting_voice_call,omitempty"` // 音频消息内容。包括结束时间、fileid，可能包括多个demofiledata、sharescreendata消息，demofiledata表示文档共享信息，sharescreendata表示屏幕共享信息。Object类型
+	VoiceID          string            `json:"voiceid,omitempty"`            // 音频 id
+	MeetingVoiceCall *MeetingVoiceCall `json:"meeting_voice_call,omitempty"` // 音频消息内容。包括结束时间、fileid，可能包括多个 demofiledata、sharescreendata 消息，demofiledata 表示文档共享信息，sharescreendata 表示屏幕共享信息。Object 类型
 }
 
 // VoipDocShareMessage 音频共享消息
 type VoipDocShareMessage struct {
 	BaseMessage
-	VoipID       string        `json:"voipid,omitempty"`         // 音频id
-	VoipDocShare *VoipDocShare `json:"voip_doc_share,omitempty"` // 共享文档消息内容。包括filename、md5sum、filesize、sdkfileid字段。Object类型
+	VoipID       string        `json:"voipid,omitempty"`         // 音频 id
+	VoipDocShare *VoipDocShare `json:"voip_doc_share,omitempty"` // 共享文档消息内容。包括 filename、md5sum、filesize、sdkfileid 字段。Object 类型
 }
 
 // ExternalRedPacketMessage 互通小红包消息
 type ExternalRedPacketMessage struct {
 	BaseMessage
 	RedPacket struct {
-		Type        uint32 `json:"type,omitempty"`        // 红包消息类型。1 普通红包、2 拼手气群红包。Uint32类型
-		Wish        string `json:"wish,omitempty"`        // 红包祝福语。String类型
-		TotalCnt    uint32 `json:"totalcnt,omitempty"`    // 红包总个数。Uint32类型
-		TotalAmount uint32 `json:"totalamount,omitempty"` // 红包总金额。Uint32类型，单位为分。
+		Type        uint32 `json:"type,omitempty"`        // 红包消息类型。1 普通红包、2 拼手气群红包。Uint32 类型
+		Wish        string `json:"wish,omitempty"`        // 红包祝福语。String 类型
+		TotalCnt    uint32 `json:"totalcnt,omitempty"`    // 红包总个数。Uint32 类型
+		TotalAmount uint32 `json:"totalamount,omitempty"` // 红包总金额。Uint32 类型，单位为分。
 	} `json:"redpacket,omitempty"`
 }
 
@@ -277,33 +277,33 @@ type ExternalRedPacketMessage struct {
 type SphFeedMessage struct {
 	BaseMessage
 	SphFeed struct {
-		FeedType uint32 `json:"feed_type,omitempty"` // 视频号消息类型。2 图片、4 视频、9 直播。Uint32类型
-		SphName  string `json:"sph_name,omitempty"`  // 视频号账号名称。String类型
-		FeedDesc string `json:"feed_desc,omitempty"` // 视频号消息描述。String类型
+		FeedType uint32 `json:"feed_type,omitempty"` // 视频号消息类型。2 图片、4 视频、9 直播。Uint32 类型
+		SphName  string `json:"sph_name,omitempty"`  // 视频号账号名称。String 类型
+		FeedDesc string `json:"feed_desc,omitempty"` // 视频号消息描述。String 类型
 	}
 }
 
 // SwitchMessage 企业切换日志
 type SwitchMessage struct {
-	MsgID  string `json:"msgid,omitempty"`  // 消息id，消息的唯一标识，企业可以使用此字段进行消息去重
-	Action string `json:"action,omitempty"` // 消息动作，切换企业为switch
-	Time   int64  `json:"time,omitempty"`   // 消息发送时间戳，utc时间，ms单位。
-	User   string `json:"user,omitempty"`   // 具体为切换企业的成员的userid。
+	MsgID  string `json:"msgid,omitempty"`  // 消息 id，消息的唯一标识，企业可以使用此字段进行消息去重
+	Action string `json:"action,omitempty"` // 消息动作，切换企业为 switch
+	Time   int64  `json:"time,omitempty"`   // 消息发送时间戳，utc 时间，ms 单位。
+	User   string `json:"user,omitempty"`   // 具体为切换企业的成员的 userid。
 }
 
 // ChatRecord 会话记录消息
 type ChatRecord struct {
 	Type         string `json:"type,omitempty"`          // 每条聊天记录的具体消息类型：ChatRecordText/ ChatRecordFile/ ChatRecordImage/ ChatRecordVideo/ ChatRecordLink/ ChatRecordLocation/ ChatRecordMixed ….
-	Content      string `json:"content,omitempty"`       // 消息内容。Json串，内容为对应类型的json
-	MsgTime      int64  `json:"msgtime,omitempty"`       // 消息时间，utc时间，ms单位。
+	Content      string `json:"content,omitempty"`       // 消息内容。Json 串，内容为对应类型的 json
+	MsgTime      int64  `json:"msgtime,omitempty"`       // 消息时间，utc 时间，ms 单位。
 	FromChatroom bool   `json:"from_chatroom,omitempty"` // 是否来自群会话。
 }
 
 // CollectDetails 填表消息
 type CollectDetails struct {
-	ID   uint64 `json:"id,omitempty"`   // 表项id
+	ID   uint64 `json:"id,omitempty"`   // 表项 id
 	Ques string `json:"ques,omitempty"` // 表项名称
-	Type string `json:"type,omitempty"` // 表项类型，有Text(文本),Number(数字),Date(日期),Time(时间)
+	Type string `json:"type,omitempty"` // 表项类型，有 Text(文本),Number(数字),Date(日期),Time(时间)
 }
 
 // News 图文消息
@@ -311,7 +311,7 @@ type News struct {
 	Title  string `json:"title,omitempty"`       // 图文消息标题
 	Desc   string `json:"description,omitempty"` // 图文消息描述
 	URL    string `json:"url,omitempty"`         // 图文消息点击跳转地址
-	PicURL string `json:"picurl,omitempty"`      // 图文消息配图的url
+	PicURL string `json:"picurl,omitempty"`      // 图文消息配图的 url
 }
 
 // MixedMsg 混合消息
@@ -323,22 +323,22 @@ type MixedMsg struct {
 // MeetingVoiceCall 音频存档消息
 type MeetingVoiceCall struct {
 	EndTime         int64             `json:"endtime,omitempty"`         // 音频结束时间
-	SdkFileID       string            `json:"sdkfileid,omitempty"`       // 音频媒体下载的id
-	DemoFileData    []DemoFileData    `json:"demofiledata,omitempty"`    // 文档分享对象，Object类型
-	ShareScreenData []ShareScreenData `json:"sharescreendata,omitempty"` // 屏幕共享对象，Object类型
+	SdkFileID       string            `json:"sdkfileid,omitempty"`       // 音频媒体下载的 id
+	DemoFileData    []DemoFileData    `json:"demofiledata,omitempty"`    // 文档分享对象，Object 类型
+	ShareScreenData []ShareScreenData `json:"sharescreendata,omitempty"` // 屏幕共享对象，Object 类型
 }
 
 // DemoFileData 文档共享消息
 type DemoFileData struct {
 	FileName     string `json:"filename,omitempty"`     // 文档共享名称
-	DemoOperator string `json:"demooperator,omitempty"` // 文档共享操作用户的id
+	DemoOperator string `json:"demooperator,omitempty"` // 文档共享操作用户的 id
 	StartTime    int64  `json:"starttime,omitempty"`    // 文档共享开始时间
 	EndTime      int64  `json:"endtime,omitempty"`      // 文档共享结束时间
 }
 
 // ShareScreenData 屏幕共享信息
 type ShareScreenData struct {
-	Share     string `json:"share,omitempty"`     // 屏幕共享用户的id
+	Share     string `json:"share,omitempty"`     // 屏幕共享用户的 id
 	StartTime int64  `json:"starttime,omitempty"` // 屏幕共享开始时间
 	EndTime   int64  `json:"endtime,omitempty"`   // 屏幕共享结束时间
 }
@@ -346,7 +346,7 @@ type ShareScreenData struct {
 // VoipDocShare 音频共享文档消息
 type VoipDocShare struct {
 	FileName  string `json:"filename,omitempty"`  // 文档共享文件名称
-	Md5Sum    string `json:"md5sum,omitempty"`    // 共享文件的md5值
+	Md5Sum    string `json:"md5sum,omitempty"`    // 共享文件的 md5 值
 	FileSize  uint64 `json:"filesize,omitempty"`  // 共享文件的大小
-	SdkFileID string `json:"sdkfileid,omitempty"` // 共享文件的sdkfile，通过此字段进行媒体数据下载
+	SdkFileID string `json:"sdkfileid,omitempty"` // 共享文件的 sdkfile，通过此字段进行媒体数据下载
 }

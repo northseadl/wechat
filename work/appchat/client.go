@@ -1,4 +1,4 @@
-// Package appchat 应用发送消息到群聊会话,企业微信接口：https://developer.work.weixin.qq.com/document/path/90248
+// Package appchat 应用发送消息到群聊会话，企业微信接口：https://developer.work.weixin.qq.com/document/path/90248
 package appchat
 
 import (

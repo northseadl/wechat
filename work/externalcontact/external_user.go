@@ -104,7 +104,7 @@ type WechatChannel struct {
 	Source   int    `json:"source"`
 }
 
-// ExternalProfile 外部联系人的自定义展示信息,可以有多个字段和多种类型，包括文本，网页和小程序
+// ExternalProfile 外部联系人的自定义展示信息，可以有多个字段和多种类型，包括文本，网页和小程序
 type ExternalProfile struct {
 	ExternalCorpName string         `json:"external_corp_name"`
 	WechatChannels   WechatChannels `json:"wechat_channels"`
@@ -276,7 +276,7 @@ type ListCustomerStrategyResponse struct {
 	NextCursor string       `json:"next_cursor"`
 }
 
-// StrategyID 规则组ID
+// StrategyID 规则组 ID
 type StrategyID struct {
 	StrategyID int `json:"strategy_id"`
 }

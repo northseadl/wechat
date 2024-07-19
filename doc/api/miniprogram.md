@@ -37,7 +37,7 @@ TODO
 
 |        名称        | 请求方式 | URL                              | 是否已实现 | 使用方法                            |
 | :----------------: | -------- | :------------------------------- | ---------- | ----------------------------------- |
-| code换取用户手机号 | POST     | /wxa/business/getuserphonenumber | YES        | (business *Business) GetPhoneNumber |
+| code 换取用户手机号 | POST     | /wxa/business/getuserphonenumber | YES        | (business *Business) GetPhoneNumber |
 
 
 ## 安全风控

@@ -46,10 +46,10 @@ type KeFuInfo struct {
 	KfNick        string `json:"kf_nick"`            // 客服昵称
 	KfID          int    `json:"kf_id"`              // 客服编号
 	KfHeadImgURL  string `json:"kf_headimgurl"`      // 客服头像
-	KfWX          string `json:"kf_wx"`              // 如果客服帐号已绑定了客服人员微信号， 则此处显示微信号
-	InviteWX      string `json:"invite_wx"`          // 如果客服帐号尚未绑定微信号，但是已经发起了一个绑定邀请， 则此处显示绑定邀请的微信号
-	InviteExpTime int    `json:"invite_expire_time"` // 如果客服帐号尚未绑定微信号，但是已经发起过一个绑定邀请， 邀请的过期时间，为unix 时间戳
-	InviteStatus  string `json:"invite_status"`      // 邀请的状态，有等待确认“waiting”，被拒绝“rejected”， 过期“expired”
+	KfWX          string `json:"kf_wx"`              // 如果客服帐号已绑定了客服人员微信号，则此处显示微信号
+	InviteWX      string `json:"invite_wx"`          // 如果客服帐号尚未绑定微信号，但是已经发起了一个绑定邀请，则此处显示绑定邀请的微信号
+	InviteExpTime int    `json:"invite_expire_time"` // 如果客服帐号尚未绑定微信号，但是已经发起过一个绑定邀请，邀请的过期时间，为 unix 时间戳
+	InviteStatus  string `json:"invite_status"`      // 邀请的状态，有等待确认“waiting”，被拒绝“rejected”，过期“expired”
 }
 
 type resKeFuList struct {
@@ -108,8 +108,8 @@ func (csm *Manager) OnlineList() (customerServiceOnlineList []*KeFuOnlineInfo, e
 
 // Add 添加客服账号
 func (csm *Manager) Add(kfAccount, nickName string) (err error) {
-	// kfAccount：完整客服帐号，格式为：帐号前缀@公众号微信号，帐号前缀最多10个字符，必须是英文、数字字符或者下划线，后缀为公众号微信号，长度不超过30个字符
-	// nickName：客服昵称，最长16个字
+	// kfAccount：完整客服帐号，格式为：帐号前缀@公众号微信号，帐号前缀最多 10 个字符，必须是英文、数字字符或者下划线，后缀为公众号微信号，长度不超过 30 个字符
+	// nickName：客服昵称，最长 16 个字
 	// 参数此处均不做校验
 	var accessToken string
 	accessToken, err = csm.GetAccessToken()

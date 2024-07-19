@@ -81,7 +81,7 @@ type (
 		NextOffset int                 `json:"next_offset"`
 		Items      []GroupChatStatItem `json:"items"`
 	}
-	// GroupChatStatItem 群聊数据统计(按群主聚合)条目
+	// GroupChatStatItem 群聊数据统计 (按群主聚合) 条目
 	GroupChatStatItem struct {
 		Owner string                `json:"owner"`
 		Data  GroupChatStatItemData `json:"data"`
@@ -138,7 +138,7 @@ type (
 		util.CommonError
 		Items []GetGroupChatStatByDayItem `json:"items"`
 	}
-	// GetGroupChatStatByDayItem 群聊数据统计(按自然日聚合)条目
+	// GetGroupChatStatByDayItem 群聊数据统计 (按自然日聚合) 条目
 	GetGroupChatStatByDayItem struct {
 		StatTime int                   `json:"stat_time"`
 		Data     GroupChatStatItemData `json:"data"`

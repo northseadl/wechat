@@ -34,7 +34,7 @@ type Request struct {
 	} `json:"action_info"`
 }
 
-// Ticket 二维码ticket
+// Ticket 二维码 ticket
 type Ticket struct {
 	util.CommonError `json:",inline"`
 	Ticket           string `json:"ticket"`
@@ -70,26 +70,34 @@ func (basic *Basic) GetQRTicket(tq *Request) (t *Ticket, err error) {
 	return
 }
 
-// ShowQRCode 通过ticket换取二维码
+// ShowQRCode 通过 ticket 换取二维码
 func ShowQRCode(tk *Ticket) string {
 	return fmt.Sprintf(getQRImgURL, tk.Ticket)
 }
 
 // NewTmpQrRequest 新建临时二维码请求实例
 func NewTmpQrRequest(exp time.Duration, scene interface{}) *Request {
-	tq := &Request{
-		ExpireSeconds: int64(exp.Seconds()),
-	}
+	var (
+		tq = &Request{
+			ExpireSeconds: int64(exp.Seconds()),
+		}
+		ok bool
+	)
 	switch reflect.ValueOf(scene).Kind() {
 	case reflect.String:
 		tq.ActionName = actionStr
-		tq.ActionInfo.Scene.SceneStr = scene.(string)
+		if tq.ActionInfo.Scene.SceneStr, ok = scene.(string); !ok {
+			panic("scene must be string")
+		}
 	case reflect.Int, reflect.Int8, reflect.Int16,
 		reflect.Int32, reflect.Int64,
 		reflect.Uint, reflect.Uint8, reflect.Uint16,
 		reflect.Uint32, reflect.Uint64:
 		tq.ActionName = actionID
-		tq.ActionInfo.Scene.SceneID = scene.(int)
+		if tq.ActionInfo.Scene.SceneID, ok = scene.(int); !ok {
+			panic("scene must be int")
+		}
+	default:
 	}
 
 	return tq
@@ -97,17 +105,25 @@ func NewTmpQrRequest(exp time.Duration, scene interface{}) *Request {
 
 // NewLimitQrRequest 新建永久二维码请求实例
 func NewLimitQrRequest(scene interface{}) *Request {
-	tq := &Request{}
+	var (
+		tq = &Request{}
+		ok bool
+	)
 	switch reflect.ValueOf(scene).Kind() {
 	case reflect.String:
 		tq.ActionName = actionLimitStr
-		tq.ActionInfo.Scene.SceneStr = scene.(string)
+		if tq.ActionInfo.Scene.SceneStr, ok = scene.(string); !ok {
+			panic("scene must be string")
+		}
 	case reflect.Int, reflect.Int8, reflect.Int16,
 		reflect.Int32, reflect.Int64,
 		reflect.Uint, reflect.Uint8, reflect.Uint16,
 		reflect.Uint32, reflect.Uint64:
 		tq.ActionName = actionLimitID
-		tq.ActionInfo.Scene.SceneID = scene.(int)
+		if tq.ActionInfo.Scene.SceneID, ok = scene.(int); !ok {
+			panic("scene must be int")
+		}
+	default:
 	}
 
 	return tq

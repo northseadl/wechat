@@ -25,9 +25,9 @@ func NewRedPacketCover(context *context.Context) *RedPacketCover {
 
 // GetRedPacketCoverRequest 获取微信红包封面参数
 type GetRedPacketCoverRequest struct {
-	// openid 可领取用户的openid
+	// openid 可领取用户的 openid
 	OpenID string `json:"openid"`
-	// ctoken 在红包封面平台获取发放ctoken（需要指定可以发放的appid）
+	// ctoken 在红包封面平台获取发放 ctoken（需要指定可以发放的 appid）
 	CToken string `json:"ctoken"`
 }
 
@@ -39,8 +39,8 @@ type GetRedPacketCoverResp struct {
 	} `json:"data"` // 唯一请求标识
 }
 
-// GetRedPacketCoverURL 获得指定用户可以领取的红包封面链接。获取参数ctoken参考微信红包封面开放平台
-// 文档地址： https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/red-packet-cover/getRedPacketCoverUrl.html
+// GetRedPacketCoverURL 获得指定用户可以领取的红包封面链接。获取参数 ctoken 参考微信红包封面开放平台
+// 文档地址：https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/red-packet-cover/getRedPacketCoverUrl.html
 func (cover *RedPacketCover) GetRedPacketCoverURL(coderParams GetRedPacketCoverRequest) (res GetRedPacketCoverResp, err error) {
 	accessToken, err := cover.GetAccessToken()
 	if err != nil {

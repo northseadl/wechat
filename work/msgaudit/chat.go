@@ -15,19 +15,19 @@ func (c ChatDataResponse) IsError() bool {
 
 // ChatData 会话存档原始数据
 type ChatData struct {
-	Seq              uint64 `json:"seq,omitempty"`                // 消息的seq值，标识消息的序号。再次拉取需要带上上次回包中最大的seq。Uint64类型，范围0-pow(2,64)-1
-	MsgID            string `json:"msgid,omitempty"`              // 消息id，消息的唯一标识，企业可以使用此字段进行消息去重。
+	Seq              uint64 `json:"seq,omitempty"`                // 消息的 seq 值，标识消息的序号。再次拉取需要带上上次回包中最大的 seq。Uint64 类型，范围 0-pow(2,64)-1
+	MsgID            string `json:"msgid,omitempty"`              // 消息 id，消息的唯一标识，企业可以使用此字段进行消息去重。
 	PublickeyVer     uint32 `json:"publickey_ver,omitempty"`      // 加密此条消息使用的公钥版本号。
-	EncryptRandomKey string `json:"encrypt_random_key,omitempty"` // 使用publickey_ver指定版本的公钥进行非对称加密后base64加密的内容，需要业务方先base64 decode处理后，再使用指定版本的私钥进行解密，得出内容。
-	EncryptChatMsg   string `json:"encrypt_chat_msg,omitempty"`   // 消息密文。需要业务方使用将encrypt_random_key解密得到的内容，与encrypt_chat_msg，传入sdk接口DecryptData,得到消息明文。
+	EncryptRandomKey string `json:"encrypt_random_key,omitempty"` // 使用 publickey_ver 指定版本的公钥进行非对称加密后 base64 加密的内容，需要业务方先 base64 decode 处理后，再使用指定版本的私钥进行解密，得出内容。
+	EncryptChatMsg   string `json:"encrypt_chat_msg,omitempty"`   // 消息密文。需要业务方使用将 encrypt_random_key 解密得到的内容，与 encrypt_chat_msg，传入 sdk 接口 DecryptData，得到消息明文。
 }
 
 // ChatMessage 会话存档消息
 type ChatMessage struct {
-	ID         string   // 消息id，消息的唯一标识，企业可以使用此字段进行消息去重。
-	From       string   // 消息发送方id。同一企业内容为userid，非相同企业为external_userid。消息如果是机器人发出，也为external_userid。
-	ToList     []string // 消息接收方列表，可能是多个，同一个企业内容为userid，非相同企业为external_userid。
-	Action     string   // 消息动作，目前有send(发送消息)/recall(撤回消息)/switch(切换企业日志)三种类型。
+	ID         string   // 消息 id，消息的唯一标识，企业可以使用此字段进行消息去重。
+	From       string   // 消息发送方 id。同一企业内容为 userid，非相同企业为 external_userid。消息如果是机器人发出，也为 external_userid。
+	ToList     []string // 消息接收方列表，可能是多个，同一个企业内容为 userid，非相同企业为 external_userid。
+	Action     string   // 消息动作，目前有 send(发送消息)/recall(撤回消息)/switch(切换企业日志) 三种类型。
 	Type       string   // 消息类型
 	originData []byte   // 原始消息对象
 }
@@ -152,7 +152,7 @@ func (c ChatMessage) GetDocMessage() (msg DocMessage, err error) {
 	return msg, err
 }
 
-// GetMarkdownMessage 获取MarkDown格式消息
+// GetMarkdownMessage 获取 MarkDown 格式消息
 func (c ChatMessage) GetMarkdownMessage() (msg MarkdownMessage, err error) {
 	err = json.Unmarshal(c.originData, &msg)
 	return msg, err

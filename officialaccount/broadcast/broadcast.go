@@ -69,9 +69,9 @@ type SpeedResult struct {
 
 // sendRequest 发送请求的数据
 type sendRequest struct {
-	// 根据tag获全部发送
+	// 根据 tag 获全部发送
 	Filter map[string]interface{} `json:"filter,omitempty"`
-	// 根据OpenID发送
+	// 根据 OpenID 发送
 	ToUser interface{} `json:"touser,omitempty"`
 	// 发送文本
 	Text map[string]interface{} `json:"text,omitempty"`
@@ -81,7 +81,7 @@ type sendRequest struct {
 	Voice map[string]interface{} `json:"voice,omitempty"`
 	// 发送视频
 	Mpvideo map[string]interface{} `json:"mpvideo,omitempty"`
-	// 发送图片-预览使用
+	// 发送图片 - 预览使用
 	Image map[string]interface{} `json:"image,omitempty"`
 	// 发送图片
 	Images *Image `json:"images,omitempty"`
@@ -100,9 +100,9 @@ type Image struct {
 }
 
 // SendText 群发文本
-// user 为nil，表示全员发送
-// &User{TagID:2} 根据tag发送
-// &User{OpenID:[]string("xxx","xxx")} 根据openid发送
+// user 为 nil，表示全员发送
+// &User{TagID:2} 根据 tag 发送
+// &User{OpenID:[]string("xxx","xxx")} 根据 openid 发送
 func (broadcast *Broadcast) SendText(user *User, content string) (*Result, error) {
 	ak, err := broadcast.GetAccessToken()
 	if err != nil {

@@ -19,11 +19,11 @@ const (
 )
 
 // GetBlackList 获取公众号的黑名单列表
-// 该接口每次调用最多可拉取 1000 个OpenID，当列表数较多时，可以通过多次拉取的方式来满足需求。
+// 该接口每次调用最多可拉取 1000 个 OpenID，当列表数较多时，可以通过多次拉取的方式来满足需求。
 // 参数 beginOpenid：当 begin_openid 为空时，默认从开头拉取。
 func (user *User) GetBlackList(beginOpenid ...string) (userlist *OpenidList, err error) {
 	if len(beginOpenid) > 1 {
-		return nil, errors.New("参数 beginOpenid 错误：请传递 1 个openID，若需要从头开始拉取列表请留空。")
+		return nil, errors.New("参数 beginOpenid 错误：请传递 1 个 openID，若需要从头开始拉取列表请留空。")
 	}
 	// 获取 AccessToken
 	var accessToken string
@@ -62,13 +62,13 @@ func (user *User) GetAllBlackList() (openIDList []string, err error) {
 	)
 
 	for {
-		// 获取列表（每次1k条）
+		// 获取列表（每次 1k 条）
 		if userlist, err = user.GetBlackList(beginOpenid); err != nil {
 			return nil, err
 		}
-		openIDList = append(openIDList, userlist.Data.OpenIDs...) // 存储本次获得的OpenIDs
+		openIDList = append(openIDList, userlist.Data.OpenIDs...) // 存储本次获得的 OpenIDs
 		count += userlist.Count                                   // 记录获得的总数量
-		beginOpenid = userlist.NextOpenID                         // 记录下次循环的起始openID
+		beginOpenid = userlist.NextOpenID                         // 记录下次循环的起始 openID
 		if count >= userlist.Total {
 			break // 获得的数量=total，结束循环
 		}
@@ -78,13 +78,13 @@ func (user *User) GetAllBlackList() (openIDList []string, err error) {
 }
 
 // BatchBlackList 拉黑用户
-// 参数 openidList：需要拉入黑名单的用户的openid，每次拉黑最多允许20个
+// 参数 openidList：需要拉入黑名单的用户的 openid，每次拉黑最多允许 20 个
 func (user *User) BatchBlackList(openidList ...string) (err error) {
 	return user.batch(batchblacklistURL, "BatchBlackList", openidList...)
 }
 
 // BatchUnBlackList 取消拉黑用户
-// 参数 openidList：需要取消拉入黑名单的用户的openid，每次拉黑最多允许20个
+// 参数 openidList：需要取消拉入黑名单的用户的 openid，每次拉黑最多允许 20 个
 func (user *User) BatchUnBlackList(openidList ...string) (err error) {
 	return user.batch(batchunblacklistURL, "BatchUnBlackList", openidList...)
 }
@@ -93,7 +93,7 @@ func (user *User) BatchUnBlackList(openidList ...string) (err error) {
 func (user *User) batch(url, apiName string, openidList ...string) (err error) {
 	// 检查参数
 	if len(openidList) == 0 || len(openidList) > 20 {
-		return errors.New("参数 openidList 错误：每次操作黑名单用户数量为1-20个。")
+		return errors.New("参数 openidList 错误：每次操作黑名单用户数量为 1-20 个。")
 	}
 
 	// 获取 AccessToken

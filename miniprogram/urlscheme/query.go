@@ -10,7 +10,7 @@ const (
 	querySchemeURL = "https://api.weixin.qq.com/wxa/queryscheme?access_token=%s"
 )
 
-// QueryScheme 获取小程序访问scheme
+// QueryScheme 获取小程序访问 scheme
 // https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/url-scheme/urlscheme.query.html#参数
 type QueryScheme struct {
 	// 小程序 scheme 码
@@ -23,7 +23,7 @@ type SchemeInfo struct {
 	AppID string `json:"appid"`
 	// 小程序页面路径。
 	Path string `json:"path"`
-	// 小程序页面query。
+	// 小程序页面 query。
 	Query string `json:"query"`
 	// 创建时间，为 Unix 时间戳。
 	CreateTime int64 `json:"create_time"`
@@ -40,7 +40,7 @@ type resQueryScheme struct {
 	util.CommonError
 	// scheme 配置
 	SchemeInfo SchemeInfo `json:"scheme_info"`
-	// 访问该链接的openid，没有用户访问过则为空字符串
+	// 访问该链接的 openid，没有用户访问过则为空字符串
 	VisitOpenid string `json:"visit_openid"`
 }
 

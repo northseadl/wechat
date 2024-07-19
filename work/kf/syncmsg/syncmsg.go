@@ -4,10 +4,10 @@ import "encoding/json"
 
 // Message 同步的消息内容
 type Message struct {
-	MsgID              string `json:"msgid"`           // 消息ID
-	OpenKFID           string `json:"open_kfid"`       // 客服帐号ID
-	ExternalUserID     string `json:"external_userid"` // 客户UserID
-	ReceptionistUserID string `json:"servicer_userid"` // 接待客服userID
+	MsgID              string `json:"msgid"`           // 消息 ID
+	OpenKFID           string `json:"open_kfid"`       // 客服帐号 ID
+	ExternalUserID     string `json:"external_userid"` // 客户 UserID
+	ReceptionistUserID string `json:"servicer_userid"` // 接待客服 userID
 	SendTime           uint64 `json:"send_time"`       // 消息发送时间
 	Origin             uint32 `json:"origin"`          // 消息来源。3-客户回复的消息 4-系统推送的消 息
 	MsgType            string `json:"msgtype"`         // 消息类型

@@ -24,11 +24,11 @@ type UploadFileReq struct {
 // UploadFileRes 上传文件返回结果
 type UploadFileRes struct {
 	util.CommonError
-	URL           string `json:"url"`           // 上传url
+	URL           string `json:"url"`           // 上传 url
 	Token         string `json:"token"`         // token
 	Authorization string `json:"authorization"` // authorization
-	FileID        string `json:"file_id"`       // 文件ID
-	CosFileID     string `json:"cos_file_id"`   // cos文件ID
+	FileID        string `json:"file_id"`       // 文件 ID
+	CosFileID     string `json:"cos_file_id"`   // cos 文件 ID
 }
 
 // BatchDownloadFileReq 上传文件请求值
@@ -39,7 +39,7 @@ type BatchDownloadFileReq struct {
 
 // DownloadFile 文件信息
 type DownloadFile struct {
-	FileID string `json:"fileid"`  // 文件ID
+	FileID string `json:"fileid"`  // 文件 ID
 	MaxAge int64  `json:"max_age"` // 下载链接有效期
 }
 
@@ -47,7 +47,7 @@ type DownloadFile struct {
 type BatchDownloadFileRes struct {
 	util.CommonError
 	FileList []struct {
-		FileID      string `json:"file_id"`      // 文件ID
+		FileID      string `json:"file_id"`      // 文件 ID
 		DownloadURL string `json:"download_url"` // 下载链接
 		Status      int64  `json:"status"`       // 状态码
 		ErrMsg      string `json:"errmsg"`       // 该文件错误信息

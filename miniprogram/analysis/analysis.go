@@ -56,8 +56,8 @@ func (analysis *Analysis) fetchData(urlStr string, body interface{}) (response [
 
 // RetainItem 留存项结构
 type RetainItem struct {
-	Key   int `json:"key"`   // 标识，0开始表示当天，1表示1甜后，以此类推
-	Value int `json:"value"` // key对应日期的新增用户数/活跃用户数（key=0时）或留存用户数（k>0时）
+	Key   int `json:"key"`   // 标识，0 开始表示当天，1 表示 1 甜后，以此类推
+	Value int `json:"value"` // key 对应日期的新增用户数/活跃用户数（key=0 时）或留存用户数（k>0 时）
 }
 
 // ResAnalysisRetain 小程序留存数据返回
@@ -68,7 +68,7 @@ type ResAnalysisRetain struct {
 	VisitUV    []RetainItem `json:"visit_uv"`     // 活跃用户留存
 }
 
-// getAnalysisRetain 获取用户访问小程序留存数据(日、月、周)
+// getAnalysisRetain 获取用户访问小程序留存数据 (日、月、周)
 func (analysis *Analysis) getAnalysisRetain(urlStr string, beginDate, endDate string) (result ResAnalysisRetain, err error) {
 	body := map[string]string{
 		"begin_date": beginDate,
@@ -137,7 +137,7 @@ func (analysis *Analysis) GetAnalysisDailySummary(beginDate, endDate string) (re
 	return
 }
 
-// ResAnalysisVisitTrend 小程序访问数据趋势(日、月、周)
+// ResAnalysisVisitTrend 小程序访问数据趋势 (日、月、周)
 type ResAnalysisVisitTrend struct {
 	util.CommonError
 	List []struct {
@@ -152,7 +152,7 @@ type ResAnalysisVisitTrend struct {
 	} `json:"list"`
 }
 
-// getAnalysisRetain 获取小程序访问数据趋势(日、月、周)
+// getAnalysisRetain 获取小程序访问数据趋势 (日、月、周)
 func (analysis *Analysis) getAnalysisVisitTrend(urlStr string, beginDate, endDate string) (result ResAnalysisVisitTrend, err error) {
 	body := map[string]string{
 		"begin_date": beginDate,
@@ -190,9 +190,9 @@ func (analysis *Analysis) GetAnalysisWeeklyVisitTrend(beginDate, endDate string)
 
 // UserPortraitItem 用户画像项目
 type UserPortraitItem struct {
-	ID    int    `json:"id"`    // 属性值id
+	ID    int    `json:"id"`    // 属性值 id
 	Name  string `json:"name"`  // 属性值名称
-	Value int    `json:"value"` // 该场景访问uv
+	Value int    `json:"value"` // 该场景访问 uv
 }
 
 // UserPortrait 用户画像
@@ -201,9 +201,9 @@ type UserPortrait struct {
 	Province  []UserPortraitItem `json:"province"`  // 省份，如北京、广东等
 	City      []UserPortraitItem `json:"city"`      // 城市，如北京、广州等
 	Genders   []UserPortraitItem `json:"genders"`   // 性别，包括男、女、未知
-	Platforms []UserPortraitItem `json:"platforms"` // 终端类型，包括iPhone, android, 其他
-	Devices   []UserPortraitItem `json:"devices"`   // 机型，如苹果iPhone 6, OPPO R9等
-	Ages      []UserPortraitItem `json:"ages"`      // 年龄，包括17岁以下、18-24对等区间
+	Platforms []UserPortraitItem `json:"platforms"` // 终端类型，包括 iPhone, android, 其他
+	Devices   []UserPortraitItem `json:"devices"`   // 机型，如苹果 iPhone 6, OPPO R9 等
+	Ages      []UserPortraitItem `json:"ages"`      // 年龄，包括 17 岁以下、18-24 对等区间
 }
 
 // ResAnalysisUserPortrait 小程序新增或活跃用户的画像分布数据返回
@@ -237,9 +237,9 @@ func (analysis *Analysis) GetAnalysisUserPortrait(beginDate, endDate string) (re
 
 // VisitDistributionIndexItem 访问分数数据结构
 type VisitDistributionIndexItem struct {
-	Key                 int `json:"key"`                    // 场景id
-	Value               int `json:"value"`                  // 该场景id访问pv
-	AccessSourceVisitUV int `json:"access_source_visit_uv"` // 该场景id访问uv
+	Key                 int `json:"key"`                    // 场景 id
+	Value               int `json:"value"`                  // 该场景 id 访问 pv
+	AccessSourceVisitUV int `json:"access_source_visit_uv"` // 该场景 id 访问 uv
 }
 
 // VisitDistributionIndex 访问分布单分布类型数据
