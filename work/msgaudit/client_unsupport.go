@@ -16,5 +16,5 @@ type Client struct {
 
 // NewClient new
 func NewClient(cfg *config.Config) (*Client, error) {
-	return nil, fmt.Errorf("会话存档功能目前只支持Linux平台运行，并且打开设置CGO_ENABLED=1")
+	return nil, fmt.Errorf("会话存档功能目前只支持 Linux 平台运行，并且打开设置 CGO_ENABLED=1")
 }

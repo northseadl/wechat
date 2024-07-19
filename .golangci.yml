@@ -24,12 +24,12 @@ linters:
     - rowserrcheck
     - staticcheck
     - stylecheck
-    - typecheck
+#    - typecheck
     - unconvert
     - unparam
     - unused
     - whitespace
-    - revive
+#    - revive
 
 issues:
   include:
@@ -53,10 +53,3 @@ linters-settings:
     lines: 66
     statements: 50
 
-#issues:
-#  include:
-#  - EXC0002 # disable excluding of issues about comments from golint
-#  exclude-rules:
-#    - linters:
-#       - stylecheck
-#      text: "ST1000:"

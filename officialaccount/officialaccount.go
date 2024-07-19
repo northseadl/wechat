@@ -4,30 +4,28 @@ import (
 	stdcontext "context"
 	"net/http"
 
-	"github.com/silenceper/wechat/v2/internal/openapi"
-	"github.com/silenceper/wechat/v2/officialaccount/draft"
-	"github.com/silenceper/wechat/v2/officialaccount/freepublish"
-	"github.com/silenceper/wechat/v2/officialaccount/ocr"
-
-	"github.com/silenceper/wechat/v2/officialaccount/datacube"
-
 	"github.com/silenceper/wechat/v2/credential"
+	"github.com/silenceper/wechat/v2/internal/openapi"
 	"github.com/silenceper/wechat/v2/officialaccount/basic"
 	"github.com/silenceper/wechat/v2/officialaccount/broadcast"
 	"github.com/silenceper/wechat/v2/officialaccount/config"
 	"github.com/silenceper/wechat/v2/officialaccount/context"
 	"github.com/silenceper/wechat/v2/officialaccount/customerservice"
+	"github.com/silenceper/wechat/v2/officialaccount/datacube"
 	"github.com/silenceper/wechat/v2/officialaccount/device"
+	"github.com/silenceper/wechat/v2/officialaccount/draft"
+	"github.com/silenceper/wechat/v2/officialaccount/freepublish"
 	"github.com/silenceper/wechat/v2/officialaccount/js"
 	"github.com/silenceper/wechat/v2/officialaccount/material"
 	"github.com/silenceper/wechat/v2/officialaccount/menu"
 	"github.com/silenceper/wechat/v2/officialaccount/message"
 	"github.com/silenceper/wechat/v2/officialaccount/oauth"
+	"github.com/silenceper/wechat/v2/officialaccount/ocr"
 	"github.com/silenceper/wechat/v2/officialaccount/server"
 	"github.com/silenceper/wechat/v2/officialaccount/user"
 )
 
-// OfficialAccount 微信公众号相关API
+// OfficialAccount 微信公众号相关 API
 type OfficialAccount struct {
 	ctx          *context.Context
 	basic        *basic.Basic
@@ -47,7 +45,7 @@ type OfficialAccount struct {
 	subscribeMsg *message.Subscribe
 }
 
-// NewOfficialAccount 实例化公众号API
+// NewOfficialAccount 实例化公众号 API
 func NewOfficialAccount(cfg *config.Config) *OfficialAccount {
 	defaultAkHandle := credential.NewDefaultAccessToken(cfg.AppID, cfg.AppSecret, credential.CacheKeyOfficialAccountPrefix, cfg.Cache)
 	ctx := &context.Context{
@@ -57,7 +55,7 @@ func NewOfficialAccount(cfg *config.Config) *OfficialAccount {
 	return &OfficialAccount{ctx: ctx}
 }
 
-// SetAccessTokenHandle 自定义access_token获取方式
+// SetAccessTokenHandle 自定义 access_token 获取方式
 func (officialAccount *OfficialAccount) SetAccessTokenHandle(accessTokenHandle credential.AccessTokenHandle) {
 	officialAccount.ctx.AccessTokenHandle = accessTokenHandle
 }
@@ -91,12 +89,12 @@ func (officialAccount *OfficialAccount) GetServer(req *http.Request, writer http
 	return srv
 }
 
-// GetAccessToken 获取access_token
+// GetAccessToken 获取 access_token
 func (officialAccount *OfficialAccount) GetAccessToken() (string, error) {
 	return officialAccount.ctx.GetAccessToken()
 }
 
-// GetAccessTokenContext 获取access_token
+// GetAccessTokenContext 获取 access_token
 func (officialAccount *OfficialAccount) GetAccessTokenContext(ctx stdcontext.Context) (string, error) {
 	if c, ok := officialAccount.ctx.AccessTokenHandle.(credential.AccessTokenContextHandle); ok {
 		return c.GetAccessTokenContext(ctx)
@@ -104,7 +102,7 @@ func (officialAccount *OfficialAccount) GetAccessTokenContext(ctx stdcontext.Con
 	return officialAccount.ctx.GetAccessToken()
 }
 
-// GetOauth oauth2网页授权
+// GetOauth oauth2 网页授权
 func (officialAccount *OfficialAccount) GetOauth() *oauth.Oauth {
 	if officialAccount.oauth == nil {
 		officialAccount.oauth = oauth.NewOauth(officialAccount.ctx)
@@ -136,7 +134,7 @@ func (officialAccount *OfficialAccount) GetFreePublish() *freepublish.FreePublis
 	return officialAccount.freepublish
 }
 
-// GetJs js-sdk配置
+// GetJs js-sdk 配置
 func (officialAccount *OfficialAccount) GetJs() *js.Js {
 	if officialAccount.js == nil {
 		officialAccount.js = js.NewJs(officialAccount.ctx)
@@ -193,7 +191,7 @@ func (officialAccount *OfficialAccount) GetDataCube() *datacube.DataCube {
 	return officialAccount.datacube
 }
 
-// GetOCR OCR接口
+// GetOCR OCR 接口
 func (officialAccount *OfficialAccount) GetOCR() *ocr.OCR {
 	if officialAccount.ocr == nil {
 		officialAccount.ocr = ocr.NewOCR(officialAccount.ctx)
@@ -214,7 +212,7 @@ func (officialAccount *OfficialAccount) GetCustomerServiceManager() *customerser
 	return customerservice.NewCustomerServiceManager(officialAccount.ctx)
 }
 
-// GetOpenAPI openApi管理接口
+// GetOpenAPI openApi 管理接口
 func (officialAccount *OfficialAccount) GetOpenAPI() *openapi.OpenAPI {
 	return openapi.NewOpenAPI(officialAccount.ctx)
 }

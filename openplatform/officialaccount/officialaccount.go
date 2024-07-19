@@ -11,7 +11,7 @@ import (
 
 // OfficialAccount 代公众号实现业务
 type OfficialAccount struct {
-	// 授权的公众号的appID
+	// 授权的公众号的 appID
 	appID string
 	*officialaccount.OfficialAccount
 }
@@ -25,22 +25,22 @@ func NewOfficialAccount(opCtx *opContext.Context, appID string) *OfficialAccount
 		Token:          opCtx.Token,
 		Cache:          opCtx.Cache,
 	})
-	// 设置获取access_token的函数
+	// 设置获取 access_token 的函数
 	officialAccount.SetAccessTokenHandle(NewDefaultAuthrAccessToken(opCtx, appID))
 	return &OfficialAccount{appID: appID, OfficialAccount: officialAccount}
 }
 
-// PlatformOauth 平台代发起oauth2网页授权
+// PlatformOauth 平台代发起 oauth2 网页授权
 func (officialAccount *OfficialAccount) PlatformOauth() *oauth.Oauth {
 	return oauth.NewOauth(officialAccount.GetContext())
 }
 
-// PlatformJs 平台代获取js-sdk配置
+// PlatformJs 平台代获取 js-sdk 配置
 func (officialAccount *OfficialAccount) PlatformJs() *js.Js {
 	return js.NewJs(officialAccount.GetContext(), officialAccount.appID)
 }
 
-// DefaultAuthrAccessToken 默认获取授权ak的方法
+// DefaultAuthrAccessToken 默认获取授权 ak 的方法
 type DefaultAuthrAccessToken struct {
 	opCtx *opContext.Context
 	appID string
@@ -54,7 +54,7 @@ func NewDefaultAuthrAccessToken(opCtx *opContext.Context, appID string) credenti
 	}
 }
 
-// GetAccessToken 获取ak
+// GetAccessToken 获取 ak
 func (ak *DefaultAuthrAccessToken) GetAccessToken() (string, error) {
 	return ak.opCtx.GetAuthrAccessToken(ak.appID)
 }
