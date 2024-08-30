@@ -146,13 +146,40 @@ func PostJSONWithRespContentType(uri string, obj interface{}) ([]byte, string, e
 	return responseData, contentType, err
 }
 
+// PostFileByStream 上传文件
+func PostFileByStream(fieldName, fileName, uri string, byteData []byte) ([]byte, error) {
+	fields := []MultipartFormField{
+		{
+			IsFile:    false,
+			Fieldname: fieldName,
+			Filename:  fileName,
+			Value:     byteData,
+		},
+	}
+	return PostMultipartForm(fields, uri)
+}
+
 // PostFile 上传文件
-func PostFile(fieldName, filename, uri string) ([]byte, error) {
+func PostFile(fieldName, filePath, uri string) ([]byte, error) {
 	fields := []MultipartFormField{
 		{
 			IsFile:    true,
 			Fieldname: fieldName,
-			Filename:  filename,
+			FilePath:  filePath,
+		},
+	}
+	return PostMultipartForm(fields, uri)
+}
+
+// PostFileFromReader 上传文件，从 io.Reader 中读取
+func PostFileFromReader(filedName, filePath, fileName, uri string, reader io.Reader) ([]byte, error) {
+	fields := []MultipartFormField{
+		{
+			IsFile:     true,
+			Fieldname:  filedName,
+			FilePath:   filePath,
+			Filename:   fileName,
+			FileReader: reader,
 		},
 	}
 	return PostMultipartForm(fields, uri)
@@ -160,10 +187,12 @@ func PostFile(fieldName, filename, uri string) ([]byte, error) {
 
 // MultipartFormField 保存文件或其他字段信息
 type MultipartFormField struct {
-	IsFile    bool
-	Fieldname string
-	Value     []byte
-	Filename  string
+	IsFile     bool
+	Fieldname  string
+	Value      []byte
+	FilePath   string
+	Filename   string
+	FileReader io.Reader
 }
 
 // PostMultipartForm 上传文件或其他多个字段
@@ -182,18 +211,24 @@ func PostMultipartForm(fields []MultipartFormField, uri string) (respBody []byte
 				return
 			}
 
-			fh, e := os.Open(field.Filename)
-			if e != nil {
-				err = fmt.Errorf("error opening file , err=%v", e)
-				return
-			}
-			defer fh.Close()
-
-			if _, err = io.Copy(fileWriter, fh); err != nil {
-				return
+			if field.FileReader == nil {
+				fh, e := os.Open(field.FilePath)
+				if e != nil {
+					err = fmt.Errorf("error opening file , err=%v", e)
+					return
+				}
+				_, err = io.Copy(fileWriter, fh)
+				_ = fh.Close()
+				if err != nil {
+					return
+				}
+			} else {
+				if _, err = io.Copy(fileWriter, field.FileReader); err != nil {
+					return
+				}
 			}
 		} else {
-			partWriter, e := bodyWriter.CreateFormField(field.Fieldname)
+			partWriter, e := bodyWriter.CreateFormFile(field.Fieldname, field.Filename)
 			if e != nil {
 				err = e
 				return
@@ -215,7 +250,7 @@ func PostMultipartForm(fields []MultipartFormField, uri string) (respBody []byte
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return nil, err
+		return nil, fmt.Errorf("http code error : uri=%v , statusCode=%v", uri, resp.StatusCode)
 	}
 	respBody, err = io.ReadAll(resp.Body)
 	return
