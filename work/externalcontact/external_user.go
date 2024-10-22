@@ -197,7 +197,7 @@ type ExternalContact struct {
 	Type            int64  `json:"type"`
 	Gender          int64  `json:"gender"`
 	UnionID         string `json:"unionid"`
-	ExternalProfile string `json:"external_profile"`
+	ExternalProfile any    `json:"external_profile"`
 }
 
 // FollowInfo 批量获取外部联系人跟进人信息
