@@ -1,6 +1,6 @@
 module github.com/northseadl/wechat/v2
 
-go 1.16
+go 1.18
 
 require (
 	github.com/alicebob/miniredis/v2 v2.30.0
