@@ -212,6 +212,7 @@ type FollowInfo struct {
 	OperUserID     string        `json:"oper_userid"`
 	AddWay         int64         `json:"add_way"`
 	WeChatChannels WechatChannel `json:"wechat_channels"`
+	State          string        `json:"state"`
 }
 
 // FailInfo 若请求中所有userid都无有效互通许可，接口直接报错701008。如果部分userid无有效互通许可，接口返回成功，该字段为无许可的userid列表
