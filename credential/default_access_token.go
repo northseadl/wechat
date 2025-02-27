@@ -189,19 +189,27 @@ func (ak *StableAccessToken) GetAccessTokenDirectly(ctx context.Context, forceRe
 type WorkAccessToken struct {
 	CorpID          string
 	CorpSecret      string
+	AgentID         string // 可选，用于区分不同应用
 	cacheKeyPrefix  string
 	cache           cache.Cache
 	accessTokenLock *sync.Mutex
 }
 
-// NewWorkAccessToken new WorkAccessToken
-func NewWorkAccessToken(corpID, corpSecret, cacheKeyPrefix string, cache cache.Cache) AccessTokenContextHandle {
+// NewWorkAccessToken new WorkAccessToken (保持向后兼容)
+func NewWorkAccessToken(corpID, corpSecret, agentID, cacheKeyPrefix string, cache cache.Cache) AccessTokenContextHandle {
+	// 调用新方法，保持兼容性
+	return NewWorkAccessTokenWithAgentID(corpID, corpSecret, agentID, cacheKeyPrefix, cache)
+}
+
+// NewWorkAccessTokenWithAgentID new WorkAccessToken with agentID
+func NewWorkAccessTokenWithAgentID(corpID, corpSecret, agentID, cacheKeyPrefix string, cache cache.Cache) AccessTokenContextHandle {
 	if cache == nil {
-		panic("cache the not exist")
+		panic("cache is needed")
 	}
 	return &WorkAccessToken{
 		CorpID:          corpID,
 		CorpSecret:      corpSecret,
+		AgentID:         agentID,
 		cache:           cache,
 		cacheKeyPrefix:  cacheKeyPrefix,
 		accessTokenLock: new(sync.Mutex),
@@ -218,7 +226,18 @@ func (ak *WorkAccessToken) GetAccessTokenContext(ctx context.Context) (accessTok
 	// 加上lock，是为了防止在并发获取token时，cache刚好失效，导致从微信服务器上获取到不同token
 	ak.accessTokenLock.Lock()
 	defer ak.accessTokenLock.Unlock()
-	accessTokenCacheKey := fmt.Sprintf("%s_access_token_%s", ak.cacheKeyPrefix, ak.CorpID)
+
+	// 构建缓存key
+	var accessTokenCacheKey string
+
+	if ak.AgentID != "" {
+		// 如果设置了AgentID，使用新的key格式
+		accessTokenCacheKey = fmt.Sprintf("%s_access_token_%s_%s", ak.cacheKeyPrefix, ak.CorpID, ak.AgentID)
+	} else {
+		// 兼容历史版本的key格式
+		accessTokenCacheKey = fmt.Sprintf("%s_access_token_%s", ak.cacheKeyPrefix, ak.CorpID)
+	}
+
 	val := ak.cache.Get(accessTokenCacheKey)
 	if val != nil {
 		accessToken = val.(string)
@@ -234,6 +253,9 @@ func (ak *WorkAccessToken) GetAccessTokenContext(ctx context.Context) (accessTok
 
 	expires := resAccessToken.ExpiresIn - 1500
 	err = ak.cache.Set(accessTokenCacheKey, resAccessToken.AccessToken, time.Duration(expires)*time.Second)
+	if err != nil {
+		return
+	}
 
 	accessToken = resAccessToken.AccessToken
 	return
