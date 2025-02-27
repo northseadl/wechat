@@ -77,6 +77,7 @@ type (
 		ExpiresIn     int                `json:"expires_in"`
 		ChatExpiresIn int                `json:"chat_expires_in"`
 		UnionID       string             `json:"unionid"`
+		IsExclusive   bool               `json:"is_exclusive"`
 		Conclusions   ConclusionsRequest `json:"conclusions"`
 	}
 	// AddContactWayResponse 配置客户联系「联系我」方式响应
